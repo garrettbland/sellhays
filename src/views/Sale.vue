@@ -65,7 +65,7 @@ export default {
 		// Get id of sale from URL
 		var saleId = this.$route.params.id
 
-		// Run 'getSales' method once the view is mounted
+		// Run method once the view is mounted
 		this.getSale(saleId).then(function(){
 
 			// End loading indicator
