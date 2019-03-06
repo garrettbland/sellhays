@@ -15,16 +15,17 @@ firebase.initializeApp(config)
 // firebase utils
 const db = firebase.firestore()
 const auth = firebase.auth()
+const google = new firebase.auth.GoogleAuthProvider()
 const currentUser = auth.currentUser
 const storage = firebase.storage()
 
 // firestore collections
 const sales = db.collection('sales')
 
-
 export {
     auth,
     currentUser,
     storage,
-    sales
+    sales,
+    google
 }

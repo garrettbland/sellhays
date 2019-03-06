@@ -10,14 +10,20 @@ fb.auth.onAuthStateChanged(user => {
     }
 })
 
-export default new Vuex.Store({
+const store = new Vuex.Store({
   state: {
-
+  	currentUser:null,
   },
   mutations: {
-
+  	setCurrentUser(state, val) {
+        state.currentUser = val
+    },
   },
   actions: {
-
+  	clearData({ commit }){
+      commit('setCurrentUser',null)
+    }
   }
 })
+
+export default store
