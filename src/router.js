@@ -57,10 +57,7 @@ const router = new Router({
     {
       path: '*',
       name: 'notfound',
-      component: NotFound,
-      meta: {
-          requiresAuth: false
-      }
+      redirect:'/404'
     }
   ]
 })

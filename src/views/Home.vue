@@ -1,30 +1,62 @@
 <template>
 	<div>
-		<h1>Sell Hays</h1>
-		<div>
-			<div v-if="loading">Loading...</div>
-			<div v-if="!loading">Not loading...</div>
+
+		<!--navbar-->
+		<div class="w-full bg-red px-3 py-2">
+			<div class="container mx-auto flex items-center justify-between">
+				<div class="w-1/3">
+					<router-link tag="a" :to="{'name':'home'}">
+						<img src="http://acmelogos.com/images/logo-5.svg" alt="logo placeholder"/>
+					</router-link>
+				</div>
+				<div class="w-1/3 text-center">
+					Loading Indicator
+				</div>
+				<div class="w-1/3 text-right">
+					<router-link tag="a" :to="{'name':'login'}">
+						Login
+					</router-link>
+				</div>
+			</div>
 		</div>
-		<p>
-			<button @click="creatSale()">
-				Create Garage Sale
-			</button>
-		</p>
-		<p>
-			<ul v-for="sale in sales">
-				<li @click="viewSale(sale.id)">
+
+		<!--header-->
+		<div class="w-full bg-purple">
+			<div class="flex items-center justify-center py-24">
+				<div class="text-center">
+					<h1 class="text-4xl">Sell Hays</h1>
+					<p>
+						Post and Find Garage Sales in Hays, Kansas
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<!--action bar-->
+		<div class="container mx-auto flex items-center justify-between bg-blue px-3 py-6 rounded-lg shadow-lg -mt-6 mb-6">
+			<div>
+				<router-link tag="a" :to="{'name':'create'}">
+					Create Free Sale
+				</router-link>
+			</div>
+			<div>
+				<img src="https://image.flaticon.com/icons/png/512/17/17764.png" alt="" class="w-6"/>
+			</div>
+		</div>
+
+		<!--sales-->
+		<div class="container mx-auto flex flex-wrap">
+			<div class="bg-grey p-4 w-full mb-4 rounded-lg" v-for="sale in sales">
+				<router-link :tag="a" :to="{'name':'sale',params:{id:sale.id}}" class="cursor-pointer no-underline text-black">
 					<div>
-						{{sale.date}}
-					</div>
-					<div>
-						{{sale.address}}
+						<span class="text-3xl">{{sale.address}}</span>
 					</div>
 					<div>
 						{{sale.description}}
 					</div>
-				</li>
-			</ul>
-		</p>
+				</router-link>
+			</div>
+		</div>
 	</div>
 </template>
 
@@ -39,12 +71,6 @@ export default {
 		}
 	},
 	methods:{
-		creatSale(){
-
-			// Programatically route user to create view
-			this.$router.push({'name':'create'})
-
-		},
 		viewSale(saleId){
 			this.$router.push({'name':'sale',params:{id:saleId}})
 		},
