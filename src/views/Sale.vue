@@ -9,9 +9,27 @@
 		<p>
 			<ul>
 				<li>
-					{{sale.date}}
-					{{sale.address}}
-					{{sale.description}}
+					<div>
+						{{sale.date}}
+					</div>
+					<div>
+						{{sale.address}}
+					</div>
+					<div>
+						{{sale.description}}
+					</div>
+					<div>
+						Tags
+						<ul>
+							<li v-for="tag in sale.tags">{{tag}}</li>
+						</ul>
+					</div>
+					<div>
+						Images
+						<ul>
+							<li v-for="image in sale.images"><img :src="image"/></li>
+						</ul>
+					</div>
 				</li>
 			</ul>
 		</p>

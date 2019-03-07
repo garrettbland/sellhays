@@ -25,24 +25,17 @@
 				<li v-for="(tag,index) in sale.tags">{{tag}} <button @click="removeTag(index)">X</button></li>
 			</ul>
 			<br>
-			<div v-if="!image">
-				<h2>Select an image</h2>
-				<input type="file" @change="onFileChange">
+			<div v-for="(image,index) in tempImages" class="w-1/3">
+				<img :src="getImage(image)" />
+				<button @click="removeImage(index)">Remove image</button>
 			</div>
-			<div v-else class="w-1/3">
-				<img :src="image" />
-				<button @click="removeImage">Remove image</button>
-			</div>
+			<h2>Add new image</h2>
+			<input type="file" @change="onFileChange">
 		</div>
 		<div>
 			<button @click="createSale()">
 				Create
 			</button>
-		</div>
-		<div>
-			<code>
-				{{sale}}
-			</code>
 		</div>
 	</div>
 </template>
@@ -55,38 +48,44 @@ export default {
 		return {
 			loading:false,
 			tag:'',
-			image:'',
-			uploader:0,
+			tempImages:[],
+			promises:[],
 			sale:{
 				date:null,
 				address:null,
 				description:null,
 				uid:null,
-				image:null,
+				images:[],
 				tags:[]
 			}
 		}
 	},
 	methods:{
+		getImage(image){
+			return URL.createObjectURL(image)
+		},
 		onFileChange(e) {
-	      var files = e.target.files || e.dataTransfer.files;
-	      if (!files.length)
-	        return;
-	      this.createImage(files[0]);
+			
+	      var file = e.target.files[0]
+	      //this.tempImages.push(URL.createObjectURL(file))
+	      this.tempImages.push(file)
+	      // if (!files.length)
+	      //   return
+	      //this.createImage(file)
 	    },
 	    createImage(file) {
-	      var image = new Image();
-	      var reader = new FileReader();
-	      var state = this;
+	
+	      var image = new Image()
+	      var reader = new FileReader()
 
 	      reader.onload = (e) => {
-	        state.image = e.target.result;
+	        return e.target.result
 	      };
-	      reader.readAsDataURL(file);
-	      state.uploadImage(file)
+	      reader.readAsDataURL(file)
+	      //state.uploadImage(file)
 	    },
-	    removeImage: function (e) {
-	      this.image = '';
+	    removeImage(index) {
+	      this.tempImages.splice(index, 1);
 	    },
 	    uploadImage(file){
 	    	var state = this
@@ -151,6 +150,114 @@ export default {
 			// Set state so we can use variable within firebase functions
 			var state = this
 
+			state.test().then(function(){
+				console.log('yay!')
+				//Now save data to firestore
+				state.putFirestoreItem()
+			})
+
+			//var promises = []
+
+			// var tempImages = state.tempImages
+			// state.processArray(tempImages).then(function(){
+			// 	console.log('fucking work please')
+			// })
+
+			// {
+			//   for (const item of tempImages) {
+			//     await putStorageItem(item)
+			//   }
+			//   console.log('Done!');
+			// }
+
+
+			// state.tempImages.forEach(async function(file){
+			// 	var promise = state.putStorageItem(file)
+			// 	await promises.push(promise)
+			// 	console.log(promises)
+			// })
+
+			// Promise.all(
+
+			// 	// Upload images first so we can grab public URL
+			// 	state.tempImages.map(item => state.putStorageItem(item))
+
+			// )
+			// .then((url) => {
+			// 	console.log(`All images uploaded successfully`)
+
+			// 	//Now save data to firestore
+			// 	state.putFirestoreItem()
+
+			// })
+			// .catch((error) => {
+			// 	console.log(`Some failed: `, error.message)
+			// });
+		},
+		async test(){
+			// Set state so we can use variable within firebase functions
+			var state = this
+
+			const images = state.tempImages
+			for(const item of images){
+				const result = await state.putStorageItem(item)
+				console.log('result is...'+result)
+			}
+			console.log('after forEach')
+		},
+		// async processArray(array){
+		// 	// Set state so we can use variable within firebase functions
+		// 	var state = this
+
+		// 	//const promises = state.tempImages.map(item => state.putStorageItem(item))
+
+		// 	await Promise.all(state.tempImages.map(item => state.putStorageItem(item))).then(function(){
+		// 		console.log('done fucker')
+		// 	})
+
+		// 	// for (const item of array){
+		// 	// 	await state.putStorageItem(item)
+		// 	// }
+		// 	// console.log('done!')
+		// },
+		putStorageItem(item) {
+
+			console.log('put storage item is happening...')
+
+			// Set state so we can use variable within firebase functions
+			var state = this
+
+			return new Promise((resolve,reject) => {
+				fb.storage.ref('sales/'+Date.now()).put(item)
+				.then((snapshot) => {
+					snapshot.ref.getDownloadURL().then(function(downloadURL) {
+		              console.log('File available at', downloadURL);
+		              //Set preview
+		              state.sale.images.push(downloadURL)
+		              resolve(downloadURL)
+		            });
+				}).catch((error) => {
+					console.log('One failed:', item, error.message)
+				})
+			})
+
+			// // the return value will be a Promise
+			// return fb.storage.ref('sales/').put(item)
+			// .then((snapshot) => {
+			// 	snapshot.ref.getDownloadURL().then(function(downloadURL) {
+	  //             console.log('File available at', downloadURL);
+	  //             //Set preview
+	  //             state.sale.images.push(downloadURL)
+	  //           });
+			// }).catch((error) => {
+			// 	console.log('One failed:', item, error.message)
+			// })
+		},
+		putFirestoreItem(){
+
+			// Set state so we can use variable within firebase functions
+			var state = this
+
 			// Call firebase function to create sale and pass in sale object
 			fb.sales.add(
 				state.sale
@@ -161,7 +268,7 @@ export default {
 				state.sale = {}
 
 				// Reset image
-				state.image = ''
+				state.tempImages = []
 
 				// End loading indicator
 				// TO DO: Put this into vuex so we can add loading stuff to navigation bar
