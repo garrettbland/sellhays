@@ -2,9 +2,18 @@
 	<div>
 		<h1>Login</h1>
 		<p>
-			Login with Google or Facebook to continue
-			<button @click="signIn()">
+			Login with to continue
+			<br>
+			<button @click="signIn('google')">
 				Sign In with Google
+			</button>
+			<br>
+			<button @click="signIn('twitter')">
+				Sign In with Twitter
+			</button>
+			<br>
+			<button @click="signIn('facebook')">
+				Sign In with Facebook
 			</button>
 		</p>
 	</div>
@@ -20,9 +29,9 @@ export default {
 		}
 	},
 	methods:{
-		signIn(){
+		signIn(socialPlatform){
 
-			fb.auth.signInWithPopup(fb.google).then((result) => {
+			fb.auth.signInWithPopup(fb[socialPlatform]).then((result) => {
 				console.log('')
 				// this.$store.commit('setCurrentUser', user)
 				this.$router.replace({'name':'create'})

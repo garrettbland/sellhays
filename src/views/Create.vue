@@ -69,20 +69,7 @@ export default {
 	      var file = e.target.files[0]
 	      //this.tempImages.push(URL.createObjectURL(file))
 	      this.tempImages.push(file)
-	      // if (!files.length)
-	      //   return
-	      //this.createImage(file)
-	    },
-	    createImage(file) {
-	
-	      var image = new Image()
-	      var reader = new FileReader()
 
-	      reader.onload = (e) => {
-	        return e.target.result
-	      };
-	      reader.readAsDataURL(file)
-	      //state.uploadImage(file)
 	    },
 	    removeImage(index) {
 	      this.tempImages.splice(index, 1);
@@ -129,7 +116,7 @@ export default {
 
 			fb.auth.signOut().then(function() {
 			  // Sign-out successful.
-			  state.$router.replace({'name':'home'})
+			  state.$router.replace({'name':'login'})
 			}, function(error) {
 			  // An error happened.
 			  console.log(error)
@@ -155,44 +142,6 @@ export default {
 				//Now save data to firestore
 				state.putFirestoreItem()
 			})
-
-			//var promises = []
-
-			// var tempImages = state.tempImages
-			// state.processArray(tempImages).then(function(){
-			// 	console.log('fucking work please')
-			// })
-
-			// {
-			//   for (const item of tempImages) {
-			//     await putStorageItem(item)
-			//   }
-			//   console.log('Done!');
-			// }
-
-
-			// state.tempImages.forEach(async function(file){
-			// 	var promise = state.putStorageItem(file)
-			// 	await promises.push(promise)
-			// 	console.log(promises)
-			// })
-
-			// Promise.all(
-
-			// 	// Upload images first so we can grab public URL
-			// 	state.tempImages.map(item => state.putStorageItem(item))
-
-			// )
-			// .then((url) => {
-			// 	console.log(`All images uploaded successfully`)
-
-			// 	//Now save data to firestore
-			// 	state.putFirestoreItem()
-
-			// })
-			// .catch((error) => {
-			// 	console.log(`Some failed: `, error.message)
-			// });
 		},
 		async test(){
 			// Set state so we can use variable within firebase functions
@@ -205,21 +154,6 @@ export default {
 			}
 			console.log('after forEach')
 		},
-		// async processArray(array){
-		// 	// Set state so we can use variable within firebase functions
-		// 	var state = this
-
-		// 	//const promises = state.tempImages.map(item => state.putStorageItem(item))
-
-		// 	await Promise.all(state.tempImages.map(item => state.putStorageItem(item))).then(function(){
-		// 		console.log('done fucker')
-		// 	})
-
-		// 	// for (const item of array){
-		// 	// 	await state.putStorageItem(item)
-		// 	// }
-		// 	// console.log('done!')
-		// },
 		putStorageItem(item) {
 
 			console.log('put storage item is happening...')
@@ -240,18 +174,6 @@ export default {
 					console.log('One failed:', item, error.message)
 				})
 			})
-
-			// // the return value will be a Promise
-			// return fb.storage.ref('sales/').put(item)
-			// .then((snapshot) => {
-			// 	snapshot.ref.getDownloadURL().then(function(downloadURL) {
-	  //             console.log('File available at', downloadURL);
-	  //             //Set preview
-	  //             state.sale.images.push(downloadURL)
-	  //           });
-			// }).catch((error) => {
-			// 	console.log('One failed:', item, error.message)
-			// })
 		},
 		putFirestoreItem(){
 
