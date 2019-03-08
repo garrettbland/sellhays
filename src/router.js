@@ -7,6 +7,8 @@ import Create from './views/Create.vue'
 import Sale from './views/Sale.vue'
 import Login from './views/Login.vue'
 import NotFound from './views/NotFound.vue'
+import Terms from './views/Terms.vue'
+import Privacy from './views/Privacy.vue'
 
 Vue.use(Router)
 
@@ -42,6 +44,22 @@ const router = new Router({
       path: '/login',
       name: 'login',
       component: Login,
+      meta: {
+          requiresAuth: false
+      }
+    },
+    {
+      path: '/terms',
+      name: 'terms',
+      component: Terms,
+      meta: {
+          requiresAuth: false
+      }
+    },
+    {
+      path: '/privacy',
+      name: 'privacy',
+      component: Privacy,
       meta: {
           requiresAuth: false
       }
