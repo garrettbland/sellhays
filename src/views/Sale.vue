@@ -1,10 +1,14 @@
 <template>
 	<div>
-		<h1>Sell Hays</h1>
-		<div>
-			<div v-if="loading">Loading...</div>
-			<div v-if="!loading">Not loading...</div>
-		</div>
+
+		<!--navbar-->
+		<Navbar />
+
+		<!--header-->
+		<Header 
+			:title="sale.address"
+			description="View details, images, and more"
+		/>
 
 		<p>
 			<ul>
@@ -37,8 +41,16 @@
 </template>
 
 <script>
+import Navbar from '@/components/Navbar'
+import Header from '@/components/Header'
+import Actionbar from '@/components/Actionbar'
 export default {
 	name:'Home',
+	components:{
+		Navbar,
+		Header,
+		Actionbar
+	},
 	data(){
 		return {
 			loading:false,
