@@ -1,8 +1,20 @@
 <template>
 	<div>
+		
+		<!--navbar-->
+		<Navbar />
+
+		<!--header-->
+		<Header 
+			title="Create New Sale"
+			description="Post your garage sale for free"
+		/>
+
+		<!--action bar-->
+		<Actionbar />
+
 		<h1>Create Garage Sale</h1>
 		<div>
-			<h4>{{getCurrentUser()}}</h4>
 			<button @click="logout()">
 				Logout
 			</button>
@@ -42,8 +54,16 @@
 
 <script>
 const fb = require('@/firebaseConfig.js')
+import Navbar from '@/components/Navbar'
+import Header from '@/components/Header'
+import Actionbar from '@/components/Actionbar'
 export default {
 	name:'Create',
+	components:{
+		Navbar,
+		Header,
+		Actionbar
+	},
 	data(){
 		return {
 			loading:false,
@@ -123,11 +143,6 @@ export default {
 			})
 
 		},
-		getCurrentUser(){
-			var user = fb.auth.currentUser
-			this.sale.uid = user.uid
-			return user.displayName
-		},
 		createSale(){
 
 			// Start loading indicator
@@ -204,12 +219,6 @@ export default {
 
 			})
 		}
-	},
-	mounted(){
-
-		// Run method once the view is mounted
-		this.getCurrentUser()
-
 	}
 }
 </script>

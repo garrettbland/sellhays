@@ -1,8 +1,16 @@
 <template>
 	<div>
-		<h1>Login</h1>
+
+		<!--navbar-->
+		<Navbar />
+
+		<!--header-->
+		<Header 
+			title="Login"
+			description="Sign in with your favorite social login to post"
+		/>
+
 		<p>
-			Login with to continue
 			<br>
 			<button @click="signIn('google')">
 				Sign In with Google
@@ -21,8 +29,14 @@
 
 <script>
 const fb = require('@/firebaseConfig.js')
+import Navbar from '@/components/Navbar'
+import Header from '@/components/Header'
 export default {
 	name:'Login',
+	components:{
+		Navbar,
+		Header
+	},
 	data(){
 		return {
 
@@ -31,9 +45,9 @@ export default {
 	methods:{
 		signIn(socialPlatform){
 
+			// Sign in with firebase popup and feed in the social platform user selected
 			fb.auth.signInWithPopup(fb[socialPlatform]).then((result) => {
-				console.log('')
-				// this.$store.commit('setCurrentUser', user)
+				this.$store.commit('setCurrentUser', result.user)
 				this.$router.replace({'name':'create'})
 			}).catch((err) => {
 				console.log(err)

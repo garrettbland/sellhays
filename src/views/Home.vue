@@ -16,7 +16,7 @@
 		<!--sales-->
 		<div class="container mx-auto flex flex-wrap">
 			<div class="bg-grey p-4 w-full mb-4 rounded-lg" v-for="sale in sales">
-				<router-link :tag="a" :to="{'name':'sale',params:{id:sale.id}}" class="cursor-pointer no-underline text-black">
+				<router-link tag="a" :to="{'name':'sale',params:{id:sale.id}}" class="cursor-pointer no-underline text-black">
 					<div>
 						<span class="text-3xl">{{sale.address}}</span>
 					</div>
@@ -36,16 +36,16 @@ import Header from '@/components/Header'
 import Actionbar from '@/components/Actionbar'
 export default {
 	name:'Home',
+	components:{
+		Navbar,
+		Header,
+		Actionbar
+	},
 	data(){
 		return {
 			loading:false,
 			sales:null
 		}
-	},
-	components:{
-		Navbar,
-		Header,
-		Actionbar
 	},
 	methods:{
 		viewSale(saleId){

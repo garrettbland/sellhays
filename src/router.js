@@ -19,10 +19,7 @@ const router = new Router({
     {
       path: '/',
       name: 'home',
-      component: Home,
-      meta: {
-          requiresAuth: false
-      }
+      component: Home
     },
     {
       path: '/create',
@@ -35,46 +32,30 @@ const router = new Router({
     {
       path: '/sales/:id',
       name: 'sale',
-      component: Sale,
-      meta: {
-          requiresAuth: false
-      }
+      component: Sale
     },
     {
       path: '/login',
       name: 'login',
-      component: Login,
-      meta: {
-          requiresAuth: false
-      }
+      component: Login
     },
     {
       path: '/terms',
       name: 'terms',
-      component: Terms,
-      meta: {
-          requiresAuth: false
-      }
+      component: Terms
     },
     {
       path: '/privacy',
       name: 'privacy',
-      component: Privacy,
-      meta: {
-          requiresAuth: false
-      }
+      component: Privacy
     },
     {
       path: '/404',
       name: 'notfound',
-      component: NotFound,
-      meta: {
-          requiresAuth: false
-      }
+      component: NotFound
     },
     {
       path: '*',
-      name: 'notfound',
       redirect:'/404'
     }
   ]

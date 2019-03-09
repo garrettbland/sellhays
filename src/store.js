@@ -13,11 +13,15 @@ fb.auth.onAuthStateChanged(user => {
 const store = new Vuex.Store({
   state: {
   	currentUser:null,
+    loading:false
   },
   mutations: {
   	setCurrentUser(state, val) {
         state.currentUser = val
     },
+    setLoading(state,val) {
+        state.loading = val
+    }
   },
   actions: {
   	clearData({ commit }){
