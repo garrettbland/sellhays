@@ -53,7 +53,6 @@
 </template>
 
 <script>
-const fb = require('@/firebaseConfig.js')
 import Navbar from '@/components/Navbar'
 import Header from '@/components/Header'
 import Actionbar from '@/components/Actionbar'
@@ -96,7 +95,7 @@ export default {
 	    },
 	    uploadImage(file){
 	    	var state = this
-	    	var storageRef = fb.storage.ref('sales/'+Date.now());
+	    	var storageRef = this.$firebase.storage.ref('sales/'+Date.now());
 	        var task = storageRef.put(file);
 	        task.on('state_changed', function progress(snapshot) {
 
@@ -128,20 +127,6 @@ export default {
 		},
 		removeTag(index){
 			this.sale.tags.splice(index, 1);
-		},
-		logout(){
-			
-			// Set state so we can use variable within firebase functions
-			var state = this
-
-			fb.auth.signOut().then(function() {
-			  // Sign-out successful.
-			  state.$router.replace({'name':'login'})
-			}, function(error) {
-			  // An error happened.
-			  console.log(error)
-			})
-
 		},
 		createSale(){
 
@@ -177,7 +162,7 @@ export default {
 			var state = this
 
 			return new Promise((resolve,reject) => {
-				fb.storage.ref('sales/'+Date.now()).put(item)
+				this.$firebase.storage.ref('sales/'+Date.now()).put(item)
 				.then((snapshot) => {
 					snapshot.ref.getDownloadURL().then(function(downloadURL) {
 		              console.log('File available at', downloadURL);
@@ -196,7 +181,7 @@ export default {
 			var state = this
 
 			// Call firebase function to create sale and pass in sale object
-			fb.sales.add(
+			this.$firebase.sales.add(
 				state.sale
 			).then(() => {
 

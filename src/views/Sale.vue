@@ -37,7 +37,6 @@
 </template>
 
 <script>
-const fb = require('@/firebaseConfig.js')
 export default {
 	name:'Home',
 	data(){
@@ -57,7 +56,7 @@ export default {
 			var state = this
 
 			// Call firebase function to retreive sales object from firestore 'sales' collection with saleId
-			const response = await fb.sales.doc(saleId).get().then(querySnapshot => {
+			const response = await this.$firebase.sales.doc(saleId).get().then(querySnapshot => {
 
 				// Check to see if firestore document with saleId exists
 				if(querySnapshot.exists){

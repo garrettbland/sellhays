@@ -12,12 +12,19 @@
 				</div>
 			</div>
 			<div class="w-1/3 text-right">
-				<router-link tag="a" :to="{'name':'login'}" v-if="$store.state.currentUser == null">
-					Login
-				</router-link>
-				<router-link tag="a" :to="{'name':'login'}" v-if="$store.state.currentUser">
-					{{$store.state.currentUser.displayName}}
-				</router-link>
+				<div v-if="$store.state.currentUser == null">
+					<router-link tag="a" :to="{'name':'login'}">
+						Login
+					</router-link>
+				</div>
+				<div v-else>
+					<router-link tag="a" :to="{'name':'account'}">
+						{{$store.state.currentUser.displayName}}
+					</router-link>
+					<button @click="logout()">
+						Logout
+					</button>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -30,6 +37,27 @@ export default {
 		return {
 
 		}
+	},
+	methods:{
+		logout(){
+			
+			// Set state so we can use variable within firebase functions
+			var state = this
+
+			this.$firebase.auth.signOut().then(function() {
+
+				// Sign-out successful. Set currentUser to null in vuex store
+				state.$store.dispatch('clearData')
+				state.$router.replace({'name':'login'})
+
+			}, function(error) {
+
+				// An error happened.
+				console.log(error)
+
+			})
+
+		},
 	}
 }
 

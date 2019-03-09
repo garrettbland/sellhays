@@ -28,7 +28,6 @@
 </template>
 
 <script>
-const fb = require('@/firebaseConfig.js')
 import Navbar from '@/components/Navbar'
 import Header from '@/components/Header'
 export default {
@@ -46,7 +45,7 @@ export default {
 		signIn(socialPlatform){
 
 			// Sign in with firebase popup and feed in the social platform user selected
-			fb.auth.signInWithPopup(fb[socialPlatform]).then((result) => {
+			this.$firebase.auth.signInWithRedirect(this.$firebase[socialPlatform]).then((result) => {
 				this.$store.commit('setCurrentUser', result.user)
 				this.$router.replace({'name':'create'})
 			}).catch((err) => {

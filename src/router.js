@@ -4,6 +4,7 @@ import firebase from 'firebase'
 
 import Home from './views/Home.vue'
 import Create from './views/Create.vue'
+import Account from './views/Account.vue'
 import Sale from './views/Sale.vue'
 import Login from './views/Login.vue'
 import NotFound from './views/NotFound.vue'
@@ -25,6 +26,14 @@ const router = new Router({
       path: '/create',
       name: 'create',
       component: Create,
+      meta: {
+          requiresAuth: true
+      }
+    },
+    {
+      path: '/account',
+      name: 'account',
+      component: Account,
       meta: {
           requiresAuth: true
       }

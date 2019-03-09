@@ -30,7 +30,6 @@
 </template>
 
 <script>
-const fb = require('@/firebaseConfig.js')
 import Navbar from '@/components/Navbar'
 import Header from '@/components/Header'
 import Actionbar from '@/components/Actionbar'
@@ -61,7 +60,7 @@ export default {
 			var state = this
 
 			// Call firebase function to retreive sales object from firestore 'sales' collection
-			const response = await fb.sales.onSnapshot(querySnapshot => {
+			const response = await this.$firebase.sales.onSnapshot(querySnapshot => {
 
 				// Set 'this.sales' array to empty
 				state.sales = []
