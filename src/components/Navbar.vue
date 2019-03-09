@@ -44,6 +44,7 @@ export default {
 			// Set state so we can use variable within firebase functions
 			var state = this
 
+			// Call firebase signOut method, remove user from vuex store, and then send back to login page
 			this.$firebase.auth.signOut().then(function() {
 
 				// Sign-out successful. Set currentUser to null in vuex store
@@ -53,11 +54,12 @@ export default {
 			}, function(error) {
 
 				// An error happened.
+				// TO-DO: Make an alert or popup or something
 				console.log(error)
 
 			})
 
-		},
+		}
 	}
 }
 

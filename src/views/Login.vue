@@ -50,25 +50,37 @@ export default {
 
 			// Sign in with firebase popup and feed in the social platform user selected
 			this.$firebase.auth.signInWithRedirect(this.$firebase[socialPlatform]).then((result) => {
-				console.log('auth is successfull...')
+
+				// Sets user in vuex store
 				this.$store.commit('setCurrentUser', result.user)
+
 			}).catch((err) => {
+
+				// If there was a problem logging in
+				// TO-DO: Make an alert or popup or something
 				console.log(err)
 			})
 
 		},
 		redirect(){
-			console.log('redirect fired...')
+
+			// If user is logged in, then route user to redirect or 'account' by default
 			if(this.currentUser){
 				this.$router.replace(this.$route.query.redirect || '/account')
 			}
 		}
 	},
 	computed: {
+
+		// Maps currentUser from vuex store to use
 		...mapState(['currentUser'])
+
 	},
   	mounted(){
+
+  		// After page is reloaded or loaded, fire redirect method
   		this.redirect()
+
   	}
 }
 </script>

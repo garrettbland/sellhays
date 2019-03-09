@@ -53,19 +53,17 @@ export default {
 	},
 	data(){
 		return {
-			loading:false,
 			sale:{}
 		}
 	},
 	methods:{
 		async getSale(saleId){
 
-			// Start loading indicator
-			// TO DO: Put this into vuex so we can add loading stuff to navigation bar
-			this.loading = true
-
 			// Set state so we can use variable within firebase functions
 			var state = this
+
+			// Start loading indicator
+			state.$store.commit('setLoading', true)
 
 			// Call firebase function to retreive sales object from firestore 'sales' collection with saleId
 			const response = await this.$firebase.sales.doc(saleId).get().then(querySnapshot => {
@@ -98,8 +96,7 @@ export default {
 		this.getSale(saleId).then(function(){
 
 			// End loading indicator
-			// TO DO: Put this into vuex so we can add loading stuff to navigation bar
-			state.loading = false
+			state.$store.commit('setLoading', false)
 
 		})
 	},

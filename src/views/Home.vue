@@ -42,22 +42,23 @@ export default {
 	},
 	data(){
 		return {
-			loading:false,
 			sales:null
 		}
 	},
 	methods:{
 		viewSale(saleId){
+
+			// Send user to sale detail view with params
 			this.$router.push({'name':'sale',params:{id:saleId}})
+
 		},
 		async getSales(){
 
-			// Start loading indicator
-			// TO DO: Put this into vuex so we can add loading stuff to navigation bar
-			this.loading = true
-
 			// Set state so we can use variable within firebase functions
 			var state = this
+
+			// Start loading indicator
+			state.$store.commit('setLoading', true)
 
 			// Call firebase function to retreive sales object from firestore 'sales' collection
 			const response = await this.$firebase.sales.onSnapshot(querySnapshot => {
@@ -86,8 +87,7 @@ export default {
 		this.getSales().then(function(){
 
 			// End loading indicator
-			// TO DO: Put this into vuex so we can add loading stuff to navigation bar
-			state.loading = false
+			state.$store.commit('setLoading', false)
 
 		})
 	},

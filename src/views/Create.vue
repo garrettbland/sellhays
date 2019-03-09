@@ -14,15 +14,7 @@
 		<Actionbar />
 
 		<h1>Create Garage Sale</h1>
-		<div>
-			<button @click="logout()">
-				Logout
-			</button>
-		</div>
-		<div>
-			<div v-if="loading">Loading...</div>
-			<div v-if="!loading">Not loading...</div>
-		</div>
+
 		<div>
 			<input v-model="sale.date" placeholder="date">
 			<br>
@@ -65,7 +57,6 @@ export default {
 	},
 	data(){
 		return {
-			loading:false,
 			tag:'',
 			tempImages:[],
 			promises:[],
@@ -81,97 +72,88 @@ export default {
 	},
 	methods:{
 		getImage(image){
+
+			// Creates blob url so we can show user preview of image
 			return URL.createObjectURL(image)
+
 		},
 		onFileChange(e) {
-			
-	      var file = e.target.files[0]
-	      //this.tempImages.push(URL.createObjectURL(file))
-	      this.tempImages.push(file)
+		
+			// Listen for user to select image and add image to array of temp images for upload
+			var file = e.target.files[0]
+			this.tempImages.push(file)
 
 	    },
 	    removeImage(index) {
-	      this.tempImages.splice(index, 1);
-	    },
-	    uploadImage(file){
-	    	var state = this
-	    	var storageRef = this.$firebase.storage.ref('sales/'+Date.now());
-	        var task = storageRef.put(file);
-	        task.on('state_changed', function progress(snapshot) {
 
-	          var percentage = (snapshot.bytesTransferred/snapshot.totalBytes)*100
-	          state.uploader = percentage
+	    	// Removes image from temp images array
+			this.tempImages.splice(index, 1);
 
-	        }, function error(err) {
-
-	            console.log('there was an error uploading image')
-
-	        },function complete() {
-
-	          console.log('success! Image uploaded')
-	            // Handle successful uploads on complete
-	            // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-	            task.snapshot.ref.getDownloadURL().then(function(downloadURL) {
-	              console.log('File available at', downloadURL);
-	              //Set preview
-	              state.sale.image = downloadURL
-	            });
-
-	        });
 	    },
 		addTag(){
+
+			// Adds tag to sales tag array and resets input box
 			if(this.tag !== ''){
 				this.sale.tags.push(this.tag)
 				this.tag = ''
 			}
 		},
 		removeTag(index){
+
+			// Removes tag from sales tag array
 			this.sale.tags.splice(index, 1);
+
 		},
 		createSale(){
 
-			// Start loading indicator
-			// TO DO: Put this into vuex so we can add loading stuff to navigation bar
-			this.loading = true
-
 			// Set state so we can use variable within firebase functions
 			var state = this
 
-			state.test().then(function(){
-				console.log('yay!')
-				//Now save data to firestore
+			// Start loading indicator
+			state.$store.commit('setLoading', true)
+
+			// Starts image uload method. Once complete, then it will save data to firestore
+			// We do this so we can upload image -> grab the uploaded public URL -> save to firestore
+			state.startImageUpload().then(function(){
+
 				state.putFirestoreItem()
+
 			})
 		},
-		async test(){
+		async startImageUpload(){
+
 			// Set state so we can use variable within firebase functions
 			var state = this
 
+			// Loop through temp images array and upload to firebase storage
 			const images = state.tempImages
 			for(const item of images){
 				const result = await state.putStorageItem(item)
-				console.log('result is...'+result)
 			}
-			console.log('after forEach')
+
 		},
 		putStorageItem(item) {
-
-			console.log('put storage item is happening...')
 
 			// Set state so we can use variable within firebase functions
 			var state = this
 
+			// Return a new promise for each image upload
+			// After each successful upload, we push the public image URL to the sale object images array
 			return new Promise((resolve,reject) => {
-				this.$firebase.storage.ref('sales/'+Date.now()).put(item)
+				state.$firebase.storage.ref('sales/'+Date.now()).put(item)
 				.then((snapshot) => {
 					snapshot.ref.getDownloadURL().then(function(downloadURL) {
-		              console.log('File available at', downloadURL);
-		              //Set preview
+
 		              state.sale.images.push(downloadURL)
 		              resolve(downloadURL)
+
 		            });
 				}).catch((error) => {
-					console.log('One failed:', item, error.message)
+
+					// Something went wrong uploading image
+					// TO-DO: Make an alert or popup or something
+					console.log('Image upload failed...', item, error.message)
+
 				})
 			})
 		},
@@ -193,13 +175,12 @@ export default {
 				state.tempImages = []
 
 				// End loading indicator
-				// TO DO: Put this into vuex so we can add loading stuff to navigation bar
-				state.loading = false
+				state.$store.commit('setLoading', false)
 
 
 			}).catch(err => {
 
-				// Log the error to console if something went wrong
+				// TO-DO: Make an alert or popup or something
 				console.log(err)
 
 			})

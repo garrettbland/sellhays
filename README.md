@@ -26,3 +26,8 @@ Create these two files below.
  Add in the following to both files. At production build, production.env is used for the build.
 
 `VUE_APP_ENVIRONMENT=`
+
+
+### To Do for v1.0
+- [ ] Setup popups or modals for alerts
+- [ ] Make the whole thing look super polished 😎
