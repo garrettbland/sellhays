@@ -30,4 +30,5 @@ Create these two files below.
 
 ### To Do for v1.0
 - [ ] Setup popups or modals for alerts
+- [ ] Create whole app loading indicator
 - [ ] Make the whole thing look super polished 😎
