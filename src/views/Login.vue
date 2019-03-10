@@ -24,9 +24,6 @@
 				Sign In with Facebook
 			</button>
 		</p>
-		<div>
-			Current user from vuex {{currentUser}}
-		</div>
 	</div>
 </template>
 

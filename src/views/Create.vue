@@ -165,26 +165,41 @@ export default {
 			// Call firebase function to create sale and pass in sale object
 			this.$firebase.sales.add(
 				state.sale
-			).then(() => {
+			)
+			.then(() => {
+
+				// User uid
+				const uid = state.$store.state.currentUser.uid
 
 				// Reset form
-				// TO DO: Put some sort of alert or something showing success and link to sale?
-				state.sale = {}
+				state.sale = {
+					date:null,
+					address:null,
+					description:null,
+					uid:uid,
+					images:[],
+					tags:[]
+				}
 
-				// Reset image
+				// Reset temp images
 				state.tempImages = []
 
 				// End loading indicator
+				// TO DO: Put some sort of alert or something showing success and link to sale?
 				state.$store.commit('setLoading', false)
 
 
-			}).catch(err => {
+			})
+			.catch(err => {
 
 				// TO-DO: Make an alert or popup or something
 				console.log(err)
 
 			})
 		}
+	},
+	mounted(){
+		this.sale.uid = this.$store.state.currentUser.uid
 	}
 }
 </script>

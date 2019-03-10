@@ -15,15 +15,23 @@
 
 		<!--sales-->
 		<div class="container mx-auto flex flex-wrap">
-			<div class="bg-grey p-4 w-full mb-4 rounded-lg" v-for="sale in sales">
-				<router-link tag="a" :to="{'name':'sale',params:{id:sale.id}}" class="cursor-pointer no-underline text-black">
-					<div>
-						<span class="text-3xl">{{sale.address}}</span>
-					</div>
-					<div>
-						{{sale.description}}
-					</div>
-				</router-link>
+			<h2>
+				My Sales
+			</h2>
+			<div class="flex justify-between items-center bg-grey p-4 w-full mb-4 rounded-lg" v-for="sale in sales">
+				<div>
+					<router-link tag="a" :to="{'name':'sale',params:{id:sale.id}}" class="cursor-pointer no-underline text-black">
+						<div>
+							<span class="text-3xl">{{sale.address}}</span>
+						</div>
+						<div>
+							{{sale.description}}
+						</div>
+					</router-link>
+				</div>
+				<div>
+					Delete
+				</div>
 			</div>
 		</div>
 
