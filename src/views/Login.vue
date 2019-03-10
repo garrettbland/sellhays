@@ -10,7 +10,7 @@
 			description="Sign in with your favorite social login to post"
 		/>
 
-		<p>
+		<div class="max-w-xl mx-auto">
 			<br>
 			<button @click="signIn('google')">
 				Sign In with Google
@@ -23,7 +23,7 @@
 			<button @click="signIn('facebook')">
 				Sign In with Facebook
 			</button>
-		</p>
+		</div>
 	</div>
 </template>
 

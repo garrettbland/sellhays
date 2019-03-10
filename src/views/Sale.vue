@@ -10,7 +10,7 @@
 			description="View details, images, and more"
 		/>
 
-		<p>
+		<div class="max-w-xl mx-auto">
 			<ul>
 				<li>
 					<div>
@@ -36,7 +36,8 @@
 					</div>
 				</li>
 			</ul>
-		</p>
+		</div>
+
 	</div>
 </template>
 

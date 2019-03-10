@@ -19,34 +19,37 @@
 		<!--action bar-->
 		<Actionbar />
 
-		<h1>Create Garage Sale</h1>
+		<div class="max-w-xl mx-auto">
+			<h1>Create Garage Sale</h1>
 
-		<div>
-			<input v-model="sale.date" placeholder="date">
-			<br>
-			<input v-model="sale.address" placeholder="address">
-			<br>
-			<textarea v-model="sale.description" placeholder="description"></textarea>
-			<br>
-			<strong>Tags</strong>
-			<br>
-			<input v-model="tag" placeholder="tag"><button @click="addTag()">Add +</button>
-			<ul>
-				<li v-for="(tag,index) in sale.tags">{{tag}} <button @click="removeTag(index)">X</button></li>
-			</ul>
-			<br>
-			<div v-for="(image,index) in tempImages" class="w-1/3">
-				<img :src="getImage(image)" />
-				<button @click="removeImage(index)">Remove image</button>
+			<div>
+				<input v-model="sale.date" placeholder="date">
+				<br>
+				<input v-model="sale.address" placeholder="address">
+				<br>
+				<textarea v-model="sale.description" placeholder="description"></textarea>
+				<br>
+				<strong>Tags</strong>
+				<br>
+				<input v-model="tag" placeholder="tag"><button @click="addTag()">Add +</button>
+				<ul>
+					<li v-for="(tag,index) in sale.tags">{{tag}} <button @click="removeTag(index)">X</button></li>
+				</ul>
+				<br>
+				<div v-for="(image,index) in tempImages" class="w-1/3">
+					<img :src="getImage(image)" />
+					<button @click="removeImage(index)">Remove image</button>
+				</div>
+				<h2>Add new image</h2>
+				<input type="file" @change="onFileChange">
 			</div>
-			<h2>Add new image</h2>
-			<input type="file" @change="onFileChange">
+			<div>
+				<button @click="createSale()">
+					Create
+				</button>
+			</div>
 		</div>
-		<div>
-			<button @click="createSale()">
-				Create
-			</button>
-		</div>
+
 	</div>
 </template>
 

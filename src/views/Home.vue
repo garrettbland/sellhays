@@ -14,7 +14,7 @@
 		<Actionbar />
 
 		<!--sales-->
-		<div class="container mx-auto flex flex-wrap">
+		<div class="max-w-xl mx-auto flex flex-wrap">
 			<div class="bg-grey p-4 w-full mb-4 rounded-lg" v-for="sale in sales">
 				<router-link tag="a" :to="{'name':'sale',params:{id:sale.id}}" class="cursor-pointer no-underline text-black">
 					<div>

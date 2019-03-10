@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="max-w-xl mx-auto">
 		<h1>404 Not Found</h1>
 	</div>
 </template>

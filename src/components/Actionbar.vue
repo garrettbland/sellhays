@@ -1,5 +1,5 @@
 <template>
-	<div class="container mx-auto flex items-center justify-between bg-blue px-3 py-6 rounded-lg shadow-lg -mt-6 mb-6">
+	<div class="max-w-xl mx-auto flex items-center justify-between bg-blue mx-3 px-3 py-6 rounded-lg shadow-lg -mt-6 mb-6">
 		<div>
 			<div v-if="$store.state.currentUser == null">
 				<router-link tag="a" :to="{'name':'login',query:{redirect:'create'}}">

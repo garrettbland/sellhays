@@ -20,7 +20,7 @@
 		<Actionbar />
 
 		<!--sales-->
-		<div class="container mx-auto flex flex-wrap">
+		<div class="max-w-xl mx-auto flex flex-wrap">
 			<h2>
 				My Sales
 			</h2>
