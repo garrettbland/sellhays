@@ -1,5 +1,11 @@
 <template>
 	<div>
+
+		<Modal title="Success!" v-if="successfulModal" @close="successfulModal = false" @confirm="goToSale()" actionTitle="View your sale">
+	      <div class="p-4">
+	      	Your sale was created successfully. To manage your current sales, go into your account page.
+	      </div>
+	    </Modal>
 		
 		<!--navbar-->
 		<Navbar />
@@ -48,12 +54,14 @@
 import Navbar from '@/components/Navbar'
 import Header from '@/components/Header'
 import Actionbar from '@/components/Actionbar'
+import Modal from '@/components/Modal'
 export default {
 	name:'Create',
 	components:{
 		Navbar,
 		Header,
-		Actionbar
+		Actionbar,
+		Modal
 	},
 	data(){
 		return {
@@ -67,10 +75,18 @@ export default {
 				uid:null,
 				images:[],
 				tags:[]
-			}
+			},
+			successfulModal:false,
+			recentlyCreatedSaleId:null
 		}
 	},
 	methods:{
+		goToSale(){
+
+			// Route user to the newly created sale
+			this.$router.push({'name':'sale',params:{id:this.recentlyCreatedSaleId}})
+
+		},
 		getImage(image){
 
 			// Creates blob url so we can show user preview of image
@@ -112,7 +128,7 @@ export default {
 			// Start loading indicator
 			state.$store.commit('setLoading', true)
 
-			// Starts image uload method. Once complete, then it will save data to firestore
+			// Starts image upload method. Once complete, then it will save data to firestore
 			// We do this so we can upload image -> grab the uploaded public URL -> save to firestore
 			state.startImageUpload().then(function(){
 
@@ -166,10 +182,13 @@ export default {
 			this.$firebase.sales.add(
 				state.sale
 			)
-			.then(() => {
+			.then(docRef => {
 
 				// User uid
 				const uid = state.$store.state.currentUser.uid
+
+				// Set recently created sale id for user to view their sale if desired
+				state.recentlyCreatedSaleId = docRef.id
 
 				// Reset form
 				state.sale = {
@@ -187,6 +206,10 @@ export default {
 				// End loading indicator
 				// TO DO: Put some sort of alert or something showing success and link to sale?
 				state.$store.commit('setLoading', false)
+
+				// Show user successful modal with link to sale
+				//this.selectedSale = sale
+				this.successfulModal = true
 
 
 			})

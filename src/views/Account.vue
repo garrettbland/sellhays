@@ -1,7 +1,7 @@
 <template>
 	<div>
 
-		<Modal title="Alert" v-if="confirmDeleteModal" @close="confirmDeleteModal = false" @confirm="deleteSale()">
+		<Modal title="Alert" v-if="confirmDeleteModal" @close="confirmDeleteModal = false" @confirm="deleteSale()" actionTitle="Confirm Delete">
 	      <div class="p-4">
 	      	Are you sure you want to delete this sale? This cannot be reversed.
 	      </div>

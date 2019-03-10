@@ -18,7 +18,7 @@
           </div>
           <div class="p-4 bg-grey-lighter rounded-b-lg flex justify-end" @click="$emit('confirm')">
             <div>
-              Confirm
+              {{actionTitle}}
             </div>
           </div>
         </div>
@@ -35,6 +35,10 @@ export default {
   },
   props:{
     title:{
+      type:String,
+      required:false
+    },
+    actionTitle:{
       type:String,
       required:false
     }

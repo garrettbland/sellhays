@@ -46,3 +46,32 @@ Create these two files below.
 - [ ] Setup image drag and drop
 - [ ] Setup image & tags with drag to reorder
 - [ ] Setup accounts to save/use previously used addresses
+
+### Firestore Rules Backup
+```
+service cloud.firestore {
+  match /databases/{database}/documents {
+  
+    // Match any document in the 'sales' collection
+    match /sales/{sale} {
+      allow create: if request.auth.uid != null;
+      allow read;
+      allow update: if resource.data.uid == request.auth.uid;
+      allow delete: if resource.data.uid == request.auth.uid;
+    }
+
+  }
+}
+
+```
+
+### Firebase Storage Rules Backup
+```
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /{allPaths=**} {
+      allow read, write: if request.auth != null;
+    }
+  }
+}
+```
