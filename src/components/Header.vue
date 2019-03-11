@@ -1,7 +1,7 @@
 <template>
 		<div class="w-full bg-purple">
-			<div class="flex items-center justify-center py-24">
-				<div class="text-center">
+			<div class="flex items-center justify-center py-24 h-32">
+				<div class="text-center" v-if="$store.state.loading === false">
 					<h1 class="text-4xl">
 						{{title}}
 					</h1>

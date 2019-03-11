@@ -5,7 +5,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "deploy-production": "mv .env staging.env && mv production.env .env && vue-cli-service build && firebase deploy && firebase use default && mv .env production.env && mv staging.env .env"
+    "deploy": "mv .env staging.env && mv production.env .env && vue-cli-service build && firebase deploy && firebase use default && mv .env production.env && mv staging.env .env"
   },
   "dependencies": {
     "firebase": "^5.8.5",
