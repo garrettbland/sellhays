@@ -13,7 +13,9 @@
 			</div>
 		</div>
 		<div>
-			<img src="https://image.flaticon.com/icons/png/512/17/17764.png" alt="" class="w-6"/>
+			<button @click="logout()" v-if="showLogout == true">
+				Logout
+			</button>
 		</div>
 	</div>
 </template>
@@ -22,10 +24,37 @@
 export default{
 	name:'Actionbar',
 	props:{
-
+		showLogout:{
+			type:Boolean,
+			required:false,
+			default:false
+		}
 	},
 	data(){
 		return {
+
+		}
+	},
+	methods:{
+		logout(){
+			
+			// Set state so we can use variable within firebase functions
+			var state = this
+
+			// Call firebase signOut method, remove user from vuex store, and then send back to login page
+			this.$firebase.auth.signOut().then(function() {
+
+				// Sign-out successful. Set currentUser to null in vuex store
+				state.$store.dispatch('clearData')
+				state.$router.replace({'name':'login'})
+
+			}, function(error) {
+
+				// An error happened.
+				// TO-DO: Make an alert or popup or something
+				console.log(error)
+
+			})
 
 		}
 	}

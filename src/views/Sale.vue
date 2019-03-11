@@ -10,7 +10,7 @@
 			description="View details, images, and more"
 		/>
 
-		<div class="max-w-xl mx-auto">
+		<div class="max-w-xl mx-auto -mt-6 bg-grey p-4 rounded-lg shadow-lg">
 			<ul>
 				<li>
 					<div>

@@ -22,7 +22,7 @@
 					<div v-else>
 						<router-link tag="a" class="flex items-center justify-end" :to="{'name':'account'}">
 							<div>
-								My Account
+								{{$store.state.currentUser.displayName}}
 							</div> 
 							<div>
 								<img class="rounded-full w-16 h-16 p-1 bg-orange hover:bg-blue" :src="$store.state.currentUser.photoURL" />

@@ -1,43 +1,26 @@
 # sellhays
 
-## Project setup
-```
-yarn install
-```
-```
-yarn serve
-```
-
-
-### Commands
-`yarn serve`
-`yarn deploy-production`
-
-### To Do for v1.0
-- [ ] Setup alert messages or toasts
-
-### Environment Variables
-Create these two files below.
-
-`.env`
-
-`production.env`
-
- Add in the following to both files. At production build, production.env is used for the build.
-
-`VUE_APP_ENVIRONMENT=`
+###Project setup
+1. Clone this repo and cd into it
+2. `yarn install`
+3. Create two environment files with `VUE_APP_ENVIRONMENT=` as the only content.
+  1.`.env`
+  2.`production.env`
+4. `yarn serve` (for development)
+5. `yarn deploy` (deploys to live firebase hosting. ONLY deploy from master.)
 
 
 ### To Do for v1.0
 - [x] Setup global loading indicator in vuex
-- [ ] Setup popups or modals for alerts
+- [x] Setup popups or modals for alerts
+- [x] Setup deleting sale along with images in storage
 - [ ] Setup limited tag list & limit tags
 - [ ] Setup date picker
 - [ ] Setup image compression and image limit to 10
 - [ ] Add trix editor to description for bold/italics
 - [ ] Create whole app loading indicator
 - [ ] Create empty list component
-- [ ] Tighten down permissions server side
+- [x] Tighten down permissions server/firebase side
 - [ ] Make the whole thing look super polished 😎
 
 ### To Do for v2.0

@@ -16,10 +16,7 @@
 			description="Post your garage sale for free"
 		/>
 
-		<!--action bar-->
-		<Actionbar />
-
-		<div class="max-w-xl mx-auto">
+		<div class="max-w-xl mx-auto -mt-6 mb-6 bg-grey p-4 rounded-lg shadow-lg">
 			<h1>Create Garage Sale</h1>
 
 			<div>
@@ -43,11 +40,12 @@
 				<h2>Add new image</h2>
 				<input type="file" @change="onFileChange">
 			</div>
-			<div>
-				<button @click="createSale()">
-					Create
-				</button>
-			</div>
+		</div>
+
+		<div class="max-w-xl mx-auto flex justify-end">
+			<button @click="createSale()" class="rounded-lg shadow-lg p-4 bg-purple">
+				Create
+			</button>
 		</div>
 
 	</div>
