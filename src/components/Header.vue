@@ -1,5 +1,5 @@
 <template>
-	<div class="w-full header-background background">
+	<div class="w-full header-background background font-sans">
 	  <div class="flex items-center justify-center py-24 h-64">
 	    <div class="text-center px-4">
 	      <h1 class="text-4xl text-white leading-normal nunito" v-if="title">

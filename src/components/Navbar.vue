@@ -1,12 +1,12 @@
 <template>
 	<div class="w-full bg-grey-lighter">
-	  <div class="max-w-xl mx-auto flex items-center justify-between px-3 py-2">
+	  <div class="max-w-xl mx-auto flex items-center justify-between px-3 py-2 font-sans">
 	    <div class="w-2/5">
 	      <router-link tag="a" :to="{'name':'home'}" class="router-link-exact-active router-link-active flex items-center nunito no-underline text-purple hover:text-purple-dark">
 	        <div>
 	          <img src="https://image.flaticon.com/icons/svg/138/138237.svg" alt="Sell Hays Logo" class="w-12 mr-4"/>
 	        </div>
-	        <div class="text-lg font-bold hidden sm:hidden md:block">
+	        <div class="text-xl font-bold hidden sm:hidden md:block">
 	          Sell Hays
 	        </div>
 	      </router-link>
@@ -27,11 +27,11 @@
 			</div>
 			<div v-else>
 				<router-link tag="a" :to="{'name':'account'}" class="router-link-exact-active router-link-active flex items-center nunito no-underline text-grey-dark hover:text-grey-darker">
-					<div class="text-lg font-bold hidden sm:hidden md:block mr-4">
-						Account
+					<div class="text-lg hidden sm:hidden md:block mr-4">
+						{{$store.state.currentUser.displayName}}
 					</div>
 					<div>
-						<img src="https://avatars2.githubusercontent.com/u/4323180?s=400&u=4962a4441fae9fba5f0f86456c6c506a21ffca4f&v=4" alt="Sell Hays Logo" class="w-12 rounded-full"/>
+						<img :src="$store.state.currentUser.photoURL" alt="Profile Image" class="w-12 rounded-full shadow-md"/>
 					</div>
 				</router-link>
 			</div>
