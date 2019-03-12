@@ -25,13 +25,13 @@
 					<div>
 						Tags
 						<ul>
-							<li v-for="tag in sale.tags">{{tag}}</li>
+							<li v-for="(tag,index) in sale.tags" :key="index">{{tag}}</li>
 						</ul>
 					</div>
 					<div>
 						Images
 						<ul>
-							<li v-for="image in sale.images"><img :src="image"/></li>
+							<li v-for="(image,index) in sale.images" :key="index"><img :src="image"/></li>
 						</ul>
 					</div>
 				</li>

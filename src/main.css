@@ -7,14 +7,27 @@
 
 /* Primary and Secondary colors for icons */
 .primary{
-	fill:#6CB2EB;
+	fill:#9561E2;
 }
 .secondary{
 	fill:#E6E8FF;
+}
+
+.trash-primary{
+	fill:#CC1F1A;
+}
+
+.trash-secondary{
+	fill:#621B18;
 }
 
 /* Header */
 .header-background{
   background: rgb(26,21,111);
   background: linear-gradient(142deg, rgba(26,21,111,1) 0%, rgba(234,13,238,1) 100%);
+}
+
+/* Account */
+.my-sales-table:last-child:hover{
+	@apply rounded-b-lg
 }

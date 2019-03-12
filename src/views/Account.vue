@@ -13,32 +13,57 @@
 		<!--header-->
 		<Header 
 			title="Account"
-			description="Manage your listings"
+			description="Manage your sales and account"
 		/>
 
 		<!--action bar-->
 		<Actionbar showLogout />
 
-		<!--sales-->
+		<!--account-->
 		<div class="max-w-xl mx-auto flex flex-wrap">
-			<h2>
-				My Sales
-			</h2>
-			<div class="flex justify-between items-center bg-grey p-4 w-full mb-4 rounded-lg" v-for="sale in sales">
-				<div>
-					<router-link tag="a" :to="{'name':'sale',params:{id:sale.id}}" class="cursor-pointer no-underline text-black">
-						<div>
-							<span class="text-3xl">{{sale.address}}</span>
-						</div>
-						<div>
-							{{sale.description}}
-						</div>
-					</router-link>
+
+			<!--my sales-->
+			<div class="flex flex-col font-sans w-full mt-6 mx-4 sm:mx-4 md:mx-0">
+				<div class="mb-4">
+					<span class="text-2xl leading-tight">
+						My Sales
+					</span>
 				</div>
-				<div @click="confirmDelete(sale)">
-					Delete
+				<div class="bg-white shadow-lg rounded-lg">
+					<div class="flex justify-between border-b-2 border-grey-light p-4">
+						<div class="w-1/3 font-bold">
+							Date
+						</div>
+						<div class="flex flex-1 font-bold">
+							<span class="hidden sm:hidden md:block">
+								Address
+							</span>
+						</div>
+						<div class="flex w-1/3 justify-end font-bold">
+							Actions
+						</div>
+					</div>
+					<div v-if="!sales.length" class="flex flex-col items-center justify-center py-24 text-grey-dark">
+						<div>Looks like you don't have any sales yet.</div>
+					</div>
+					<div @click="viewSale(sale.id)" v-for="(sale,index) in sales" :key="index" class="flex justify-between items-center p-4 hover:bg-grey-lighter cursor-pointer no-underline text-grey-darkest my-sales-table">
+						<div class="flex w-1/3">
+							{{sale.date}}
+						</div>
+						<div class="flex flex-1">
+							<span class="hidden sm:hidden md:block">
+								{{sale.address}}
+							</span>
+						</div>
+						<div class="flex justify-end h-8" v-on:click.stop>
+							<button @click="confirmDelete(sale)" class="focus:outline-none outline-none">
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-8 icon-trash"><path class="trash-primary" d="M5 5h14l-.89 15.12a2 2 0 0 1-2 1.88H7.9a2 2 0 0 1-2-1.88L5 5zm5 5a1 1 0 0 0-1 1v6a1 1 0 0 0 2 0v-6a1 1 0 0 0-1-1zm4 0a1 1 0 0 0-1 1v6a1 1 0 0 0 2 0v-6a1 1 0 0 0-1-1z"></path><path class="trash-secondary" d="M8.59 4l1.7-1.7A1 1 0 0 1 11 2h2a1 1 0 0 1 .7.3L15.42 4H19a1 1 0 0 1 0 2H5a1 1 0 1 1 0-2h3.59z"></path></svg>
+							</button>
+						</div>
+					</div>
 				</div>
 			</div>
+
 		</div>
 
 	</div>

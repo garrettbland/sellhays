@@ -6,7 +6,7 @@
 	        <div>
 	          <img src="https://image.flaticon.com/icons/svg/138/138237.svg" alt="Sell Hays Logo" class="w-12 mr-4"/>
 	        </div>
-	        <div class="text-xl font-bold hidden sm:hidden md:block">
+	        <div class="text-lg font-bold hidden sm:hidden md:block">
 	          Sell Hays
 	        </div>
 	      </router-link>

@@ -15,6 +15,7 @@
 - [x] Setup popups or modals for alerts
 - [x] Setup deleting sale along with images in storage
 - [ ] Setup limited tag list & limit tags
+- [ ] Setup simple breadcrumb navigation? 
 - [ ] Setup date picker
 - [ ] Setup image compression and image limit to 10
 - [ ] Add trix editor to description for bold/italics
@@ -25,7 +26,9 @@
 
 ### To Do for v2.0
 - [ ] Setup sale editing
+- [ ] Setup sale tracking & metrics for users
 - [ ] Setup logging for errors so we can track
+- [ ] Setup pagination 
 - [ ] Setup image drag and drop
 - [ ] Setup image & tags with drag to reorder
 - [ ] Setup accounts to save/use previously used addresses

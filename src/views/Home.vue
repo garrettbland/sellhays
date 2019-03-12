@@ -15,7 +15,7 @@
 
 		<!--sales-->
 		<div class="max-w-xl mx-auto flex flex-wrap">
-			<div class="bg-grey p-4 w-full mb-4 rounded-lg" v-for="sale in sales">
+			<div class="bg-grey p-4 w-full mb-4 rounded-lg" v-for="(sale,index) in sales" :key="index">
 				<router-link tag="a" :to="{'name':'sale',params:{id:sale.id}}" class="cursor-pointer no-underline text-black">
 					<div>
 						<span class="text-3xl">{{sale.address}}</span>
