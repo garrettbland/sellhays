@@ -1,37 +1,43 @@
 <template>
-	<div>
-
-		<div class="w-full bg-red">
-			<div class="max-w-xl mx-auto flex items-center justify-between px-3 py-2">
-				<div class="w-1/3">
-					<router-link tag="a" :to="{'name':'home'}">
-						<img src="http://acmelogos.com/images/logo-5.svg" alt="logo placeholder"/>
-					</router-link>
-				</div>
-				<div class="w-1/3 text-center">
-					<div v-if="$store.state.loading">
-						Loading...
-					</div>
-				</div>
-				<div class="w-1/3 text-right">
-					<div v-if="$store.state.currentUser == null">
-						<router-link tag="a" :to="{'name':'login'}">
-							Login
-						</router-link>
-					</div>
-					<div v-else>
-						<router-link tag="a" class="flex items-center justify-end" :to="{'name':'account'}">
-							<div>
-								{{$store.state.currentUser.displayName}}
-							</div> 
-							<div>
-								<img class="rounded-full w-16 h-16 p-1 bg-orange hover:bg-blue" :src="$store.state.currentUser.photoURL" />
-							</div>
-						</router-link>
-					</div>
-				</div>
+	<div class="w-full bg-grey-lighter">
+	  <div class="max-w-xl mx-auto flex items-center justify-between px-3 py-2">
+	    <div class="w-2/5">
+	      <router-link tag="a" :to="{'name':'home'}" class="router-link-exact-active router-link-active flex items-center nunito no-underline text-purple hover:text-purple-dark">
+	        <div>
+	          <img src="https://image.flaticon.com/icons/svg/138/138237.svg" alt="Sell Hays Logo" class="w-12 mr-4"/>
+	        </div>
+	        <div class="text-lg font-bold hidden sm:hidden md:block">
+	          Sell Hays
+	        </div>
+	      </router-link>
+	    </div>
+	    <div class="w-1/5 text-center">
+	    	<div v-if="$store.state.loading">
+				<svg width="2.5rem"  height="2.5rem"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" class="lds-dual-ring" style="background: none;"><circle cx="50" cy="50" fill="none" stroke-linecap="round" r="40" stroke-width="12" stroke="#9561e2" stroke-dasharray="62.83185307179586 62.83185307179586" transform="rotate(224.113 50 50)"><animateTransform attributeName="transform" type="rotate" calcMode="linear" values="0 50 50;360 50 50" keyTimes="0;1" dur="1.2s" begin="0s" repeatCount="indefinite"></animateTransform></circle></svg>
 			</div>
-		</div>
+	    </div>
+	    <div class="w-2/5 flex justify-end">
+
+	    	<div v-if="$store.state.currentUser == null">
+				<router-link tag="a" :to="{'name':'account'}" class="router-link-exact-active router-link-active flex items-center nunito no-underline text-grey-dark hover:text-grey-darker">
+					<div class="text-lg font-bold">
+						Login
+					</div>
+				</router-link>
+			</div>
+			<div v-else>
+				<router-link tag="a" :to="{'name':'account'}" class="router-link-exact-active router-link-active flex items-center nunito no-underline text-grey-dark hover:text-grey-darker">
+					<div class="text-lg font-bold hidden sm:hidden md:block mr-4">
+						Account
+					</div>
+					<div>
+						<img src="https://avatars2.githubusercontent.com/u/4323180?s=400&u=4962a4441fae9fba5f0f86456c6c506a21ffca4f&v=4" alt="Sell Hays Logo" class="w-12 rounded-full"/>
+					</div>
+				</router-link>
+			</div>
+
+	    </div>
+	  </div>
 	</div>
 </template>
 

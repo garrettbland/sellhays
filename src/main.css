@@ -4,3 +4,17 @@
 @tailwind screen;
 
 /* Custom styles go below */
+
+/* Primary and Secondary colors for icons */
+.primary{
+	fill:#6CB2EB;
+}
+.secondary{
+	fill:#E6E8FF;
+}
+
+/* Header */
+.header-background{
+  background: rgb(26,21,111);
+  background: linear-gradient(142deg, rgba(26,21,111,1) 0%, rgba(234,13,238,1) 100%);
+}
