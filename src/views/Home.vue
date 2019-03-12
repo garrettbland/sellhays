@@ -47,12 +47,6 @@ export default {
 		}
 	},
 	methods:{
-		viewSale(saleId){
-
-			// Send user to sale detail view with params
-			this.$router.push({'name':'sale',params:{id:saleId}})
-
-		},
 		async getSales(){
 
 			// Set state so we can use variable within firebase functions

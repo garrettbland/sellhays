@@ -1,6 +1,6 @@
 # sellhays
 
-###Project setup
+### Project setup
 1. Clone this repo and cd into it
 2. `yarn install`
 3. Create two environment files with `VUE_APP_ENVIRONMENT=` as the only content.
