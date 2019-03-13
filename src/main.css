@@ -21,6 +21,22 @@
 	fill:#621B18;
 }
 
+.calendar-primary{
+	fill:#9561E2;
+}
+
+.calendar-secondary{
+	fill:#794ACF;
+}
+
+.clock-primary{
+	fill:#9561E2;
+}
+
+.clock-secondary{
+	fill:#F3EBFF;
+}
+
 /* Header */
 .header-background{
   background: rgb(26,21,111);
@@ -30,4 +46,16 @@
 /* Account */
 .my-sales-table:last-child:hover{
 	@apply rounded-b-lg
+}
+
+/* Home */
+.sale {
+	transition: all 0.2s ease;
+}
+.sale .previewimage{
+  transition: all 0.2s ease;
+}
+.sale:hover .previewimage{
+  margin-right:0.4rem;
+  transition: all 0.2s ease;
 }
