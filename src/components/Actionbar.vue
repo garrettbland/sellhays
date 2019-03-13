@@ -9,7 +9,7 @@
 		    </div>
 		    <div v-else>
 		        <router-link tag="a" :to="{'name':'create'}" class="flex items-center py-1 px-1 h-10 bg-purple border-2 border-transparent hover:bg-purple-dark rounded-lg no-underline focus:outline-none">
-		            <span class="px-3 text-purple-lightest">Create Free Sale</span>
+		            <span class="px-3 text-white">Create Free Sale</span>
 					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-8 icon-add"><path class="secondary" fill-rule="evenodd" d="M17 11a1 1 0 0 1 0 2h-4v4a1 1 0 0 1-2 0v-4H7a1 1 0 0 1 0-2h4V7a1 1 0 0 1 2 0v4h4z"></path></svg>
 		        </router-link>
 			</div>

@@ -20,7 +20,7 @@
 		<Actionbar showLogout />
 
 		<!--account-->
-		<div class="max-w-xl mx-auto flex flex-wrap">
+		<div class="max-w-xl mx-auto flex flex-wrap mb-12">
 
 			<!--my sales-->
 			<div class="flex flex-col font-sans w-full mt-6 mx-4 sm:mx-4 md:mx-0">

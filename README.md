@@ -17,7 +17,7 @@
 - [ ] Setup limited tag list & limit tags
 - [ ] Setup simple breadcrumb navigation? 
 - [ ] Setup date picker
-- [ ] Setup image compression and image limit to 10
+- [ ] Setup image compression and image limit to 5
 - [ ] Add trix editor to description for bold/italics
 - [ ] Create whole app loading indicator
 - [ ] Create empty list component
@@ -26,6 +26,8 @@
 
 ### To Do for v2.0
 - [ ] Setup sale editing
+- [ ] Setup image compression, up limit maybe, and add in thumbnails for faster home loading
+- [ ] Setup home page sale preview images loading indicator
 - [ ] Setup sale tracking & metrics for users
 - [ ] Setup logging for errors so we can track
 - [ ] Setup pagination 

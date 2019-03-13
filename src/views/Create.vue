@@ -22,6 +22,10 @@
 			<div>
 				<input v-model="sale.date" placeholder="date">
 				<br>
+				<input v-model="sale.time.start" placeholder="time start">
+				<br>
+				<input v-model="sale.time.end" placeholder="time end">
+				<br>
 				<input v-model="sale.address" placeholder="address">
 				<br>
 				<textarea v-model="sale.description" placeholder="description"></textarea>
@@ -71,11 +75,15 @@ export default {
 			promises:[],
 			sale:{
 				date:null,
+				time:{
+					start:null,
+					end:null,
+				},
 				address:null,
 				description:null,
 				uid:null,
 				images:[],
-				tags:[]
+				tags:[],
 			},
 			successfulModal:false,
 			recentlyCreatedSaleId:null
@@ -194,6 +202,10 @@ export default {
 				// Reset form
 				state.sale = {
 					date:null,
+					time:{
+						start:null,
+						end:null,
+					},
 					address:null,
 					description:null,
 					uid:uid,
