@@ -48,7 +48,7 @@
 					</div>
 					<div @click="viewSale(sale.id)" v-for="(sale,index) in sales" :key="index" class="flex justify-between items-center p-4 hover:bg-grey-lighter cursor-pointer no-underline text-grey-darkest my-sales-table">
 						<div class="flex w-1/3">
-							{{sale.date}}
+							{{sale.date.start}}
 						</div>
 						<div class="flex flex-1">
 							<span class="hidden sm:hidden md:block">

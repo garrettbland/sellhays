@@ -59,3 +59,9 @@
   margin-right:0.4rem;
   transition: all 0.2s ease;
 }
+
+/* Trix Customizations */
+.trix-button--icon-increase-nesting-level { display: none; }
+.trix-button--icon-decrease-nesting-level { display: none; }
+.trix-button--icon-code { display: none; }
+.trix-button--icon-quote { display: none; }

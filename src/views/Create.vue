@@ -15,43 +15,88 @@
 			title="Create New Sale"
 			description="Post your garage sale for free"
 		/>
-
-		<div class="max-w-xl mx-auto -mt-6 mb-6 bg-grey p-4 rounded-lg shadow-lg">
-		  <h1>Create Garage Sale</h1>
-		  <div>
-		    <input placeholder="date"><br>
-		    <input placeholder="time start"><br>
-		    <input placeholder="time end"><br>
-		    <input placeholder="address" data-kwimpalastatus="alive" data-kwimpalaid="1552512114187-2"><br>
-		    <textarea placeholder="description"></textarea><br>
-		    <strong>Tags</strong><br>
-		    <input placeholder="tag"><button>Add +</button>
-		    <ul>
-		    </ul>
-		    <br>
-		    <h2>Add new image</h2>
-		    <input type="file">
-		    </div>
-		    </div>
 		    
 		    
-		  <div class="max-w-xl mx-auto bg-white p-4 rounded-lg shadow-lg">
+		  <div class="max-w-xl mx-auto bg-white p-4 rounded-lg shadow-lg -mt-6 font-sans">
 		    <div class="flex flex-col">
 
+		    <!-- row -->
 		    <div class="flex justify-between items-center">
-		    	<div class="w-3/4 mr-2">
+		    	<div class="w-3/5 pr-4">
 		    		<div>
 		    			Address
 		    		</div>
-		      		<input placeholder="Street Address" class="w-full bg-grey-light p-3 text-2xl text-black rounded-lg focus:outline-none border-2 border-transparent hover:border-grey focus:border-grey"/>
+		      		<input v-model="sale.address" placeholder="Street Address" class="w-full bg-grey-light p-3 text-2xl text-black rounded-lg focus:outline-none border-2 border-transparent hover:border-grey focus:border-grey"/>
 		      	</div>
-		      	<div class="w-1/4 ml-2">
+		      	<div class="w-2/5">
 		      		<div>
 		    			City
 		    		</div>
-		      		<div class="flex bg-grey p-3 text-2xl text-grey-darker rounded-lg focus:outline-none border-2 border-transparent">
-			        	Hays, Kansas
+		      		<div class="flex bg-grey-lighter p-3 text-2xl text-grey-darker opacity-75 rounded-lg focus:outline-none border-2 border-transparent">
+			        	Hays, Kansas 67601
 			     	</div>
+		      	</div>
+		    </div>
+
+		    <!-- row -->
+		    <div class="flex justify-between items-center mt-8">
+		    	<div class="w-1/2 pr-4">
+		    		<div>
+		    			Date of Sale
+		    		</div>
+		      		<input v-model="sale.date.start" placeholder="Aug 5, 2019" class="w-full bg-grey-light p-3 text-2xl text-black rounded-lg focus:outline-none border-2 border-transparent hover:border-grey focus:border-grey"/>
+		      	</div>
+		      	<div class="w-1/4 pr-4">
+		      		<div>
+		    			Start Time
+		    		</div>
+		      		<input v-model="sale.time.start" placeholder="2:00 PM" class="w-full bg-grey-light p-3 text-2xl text-black rounded-lg focus:outline-none border-2 border-transparent hover:border-grey focus:border-grey"/>
+		      	</div>
+		      	<div class="w-1/4">
+		      		<div>
+		    			End Time
+		    		</div>
+		      		<input v-model="sale.time.end" placeholder="7:00 PM" class="w-full bg-grey-light p-3 text-2xl text-black rounded-lg focus:outline-none border-2 border-transparent hover:border-grey focus:border-grey"/>
+		      	</div>
+		    </div>
+
+		    <!-- row -->
+		    <div class="flex justify-between items-center mt-8">
+		      	<div class="w-full">
+		      		<VueTrix v-model="sale.description" placeholder="Description of your sale" class="text-2xl" @trix-file-accept.prevent/>
+		      	</div>
+		    </div>
+
+		   	<!-- row -->
+		    <div class="flex flex-wrap justify-between items-center mt-8">
+		    	<div class="w-full">
+	    			Images (max of 3)
+	    		</div>
+		      	<div class="w-1/3 px-2" v-for="(image,index) in tempImages">
+		      		<div class="flex justify-center bg-grey-lightest border-2 border-dashed border-grey rounded-lg hover:border-purple cursor-pointer">
+		      			<div>
+		      				<img :src="getImage(image)" />
+							<button @click="removeImage(index)">Remove image</button>
+		      			</div>
+		      		</div>
+		      	</div>
+		      	<div class="w-1/3 px-2">
+		      		<div class="flex justify-center bg-grey-lightest border-2 border-dashed border-grey rounded-lg hover:border-purple cursor-pointer">
+		      			<div class="py-12 text-grey-darker opacity-75">
+		      				Click here to add image
+		      				<input type="file" @change="onFileChange">
+		      			</div>
+		      		</div>
+		      	</div>
+		    </div>
+
+		    <!-- row -->
+		    <div class="flex justify-between items-center mt-8">
+		      	<div class="w-full">
+		      		<input v-model="tag" placeholder="tag"><button @click="addTag()">Add +</button>
+					<ul>
+						<li v-for="(tag,index) in sale.tags">{{tag}} <button @click="removeTag(index)">X</button></li>
+					</ul>
 		      	</div>
 		    </div>
     
@@ -72,13 +117,15 @@ import Navbar from '@/components/Navbar'
 import Header from '@/components/Header'
 import Actionbar from '@/components/Actionbar'
 import Modal from '@/components/Modal'
+import VueTrix from "vue-trix";
 export default {
 	name:'Create',
 	components:{
 		Navbar,
 		Header,
 		Actionbar,
-		Modal
+		Modal,
+		VueTrix
 	},
 	data(){
 		return {
@@ -86,7 +133,10 @@ export default {
 			tempImages:[],
 			promises:[],
 			sale:{
-				date:null,
+				date:{
+					start:null,
+					end:null,
+				},
 				time:{
 					start:null,
 					end:null,
@@ -213,10 +263,13 @@ export default {
 
 				// Reset form
 				state.sale = {
-					date:null,
+					date:{
+						start:null,
+						end:null
+					},
 					time:{
 						start:null,
-						end:null,
+						end:null
 					},
 					address:null,
 					description:null,

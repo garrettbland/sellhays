@@ -7212,6 +7212,11 @@ trim-right@^1.0.1:
   resolved "https://registry.yarnpkg.com/trim-right/-/trim-right-1.0.1.tgz#cb2e1203067e0c8de1f614094b9fe45704ea6003"
   integrity sha1-yy4SAwZ+DI3h9hQJS5/kVwTqYAM=
 
+trix@^1.0.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/trix/-/trix-1.1.0.tgz#8286149128f032d6d6df17fc8dcd2ee2aed5e7de"
+  integrity sha512-FKqrxRdCOzdq+mKJeZC9Mio02T0gZipOo64Aw4uytWhI7+OH8n41iooT0UL9s0vbppm4HN/1B5Ns2rGCo4iNZA==
+
 tryer@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/tryer/-/tryer-1.0.1.tgz#f2c85406800b9b0f74c9f7465b81eaad241252f8"
@@ -7514,6 +7519,13 @@ vue-template-es2015-compiler@^1.9.0:
   version "1.9.1"
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.9.1.tgz#1ee3bc9a16ecbf5118be334bb15f9c46f82f5825"
   integrity sha512-4gDntzrifFnCEvyoO8PqyJDmguXgVPxKiIxrBKjIowvL9l+N66196+72XVYR8BBf1Uv1Fgt3bGevJ+sEmxfZzw==
+
+vue-trix@^0.7.4:
+  version "0.7.4"
+  resolved "https://registry.yarnpkg.com/vue-trix/-/vue-trix-0.7.4.tgz#b91098d11e47cd34727a6e7c1abcca83194e836b"
+  integrity sha512-Wk5ACeZDTv/ivBaB/pYV8qfSmgN8rGLMCiqMR/hkyghlzB70/CU3on9YUBjq9cBqHVqvrUq+GA+W+7uRQ/o0Lg==
+  dependencies:
+    trix "^1.0.0"
 
 vue@^2.6.6:
   version "2.6.8"

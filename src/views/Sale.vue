@@ -14,13 +14,13 @@
 			<ul>
 				<li>
 					<div>
-						{{sale.date}}
+						{{sale.date.start}}
 					</div>
 					<div>
 						{{sale.address}}
 					</div>
-					<div>
-						{{sale.description}}
+					<div v-html="sale.description">
+
 					</div>
 					<div>
 						Tags
