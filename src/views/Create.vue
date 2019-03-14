@@ -17,34 +17,46 @@
 		/>
 
 		<div class="max-w-xl mx-auto -mt-6 mb-6 bg-grey p-4 rounded-lg shadow-lg">
-			<h1>Create Garage Sale</h1>
+		  <h1>Create Garage Sale</h1>
+		  <div>
+		    <input placeholder="date"><br>
+		    <input placeholder="time start"><br>
+		    <input placeholder="time end"><br>
+		    <input placeholder="address" data-kwimpalastatus="alive" data-kwimpalaid="1552512114187-2"><br>
+		    <textarea placeholder="description"></textarea><br>
+		    <strong>Tags</strong><br>
+		    <input placeholder="tag"><button>Add +</button>
+		    <ul>
+		    </ul>
+		    <br>
+		    <h2>Add new image</h2>
+		    <input type="file">
+		    </div>
+		    </div>
+		    
+		    
+		  <div class="max-w-xl mx-auto bg-white p-4 rounded-lg shadow-lg">
+		    <div class="flex flex-col">
 
-			<div>
-				<input v-model="sale.date" placeholder="date">
-				<br>
-				<input v-model="sale.time.start" placeholder="time start">
-				<br>
-				<input v-model="sale.time.end" placeholder="time end">
-				<br>
-				<input v-model="sale.address" placeholder="address">
-				<br>
-				<textarea v-model="sale.description" placeholder="description"></textarea>
-				<br>
-				<strong>Tags</strong>
-				<br>
-				<input v-model="tag" placeholder="tag"><button @click="addTag()">Add +</button>
-				<ul>
-					<li v-for="(tag,index) in sale.tags">{{tag}} <button @click="removeTag(index)">X</button></li>
-				</ul>
-				<br>
-				<div v-for="(image,index) in tempImages" class="w-1/3">
-					<img :src="getImage(image)" />
-					<button @click="removeImage(index)">Remove image</button>
-				</div>
-				<h2>Add new image</h2>
-				<input type="file" @change="onFileChange">
-			</div>
-		</div>
+		    <div class="flex justify-between items-center">
+		    	<div class="w-3/4 mr-2">
+		    		<div>
+		    			Address
+		    		</div>
+		      		<input placeholder="Street Address" class="w-full bg-grey-light p-3 text-2xl text-black rounded-lg focus:outline-none border-2 border-transparent hover:border-grey focus:border-grey"/>
+		      	</div>
+		      	<div class="w-1/4 ml-2">
+		      		<div>
+		    			City
+		    		</div>
+		      		<div class="flex bg-grey p-3 text-2xl text-grey-darker rounded-lg focus:outline-none border-2 border-transparent">
+			        	Hays, Kansas
+			     	</div>
+		      	</div>
+		    </div>
+    
+		    </div>
+		  </div>
 
 		<div class="max-w-xl mx-auto flex justify-end">
 			<button @click="createSale()" class="rounded-lg shadow-lg p-4 bg-purple">

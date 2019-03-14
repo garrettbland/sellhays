@@ -14,7 +14,7 @@
 		        </router-link>
 			</div>
 			<div>
-				<button @click="logout()" v-if="showLogout == true" class="flex items-center py-1 px-1 h-10 bg-white border-2 border-purple text-purple hover:bg-purple hover:text-purple-lightest rounded-lg no-underline focus:outline-none">
+				<button @click="logout()" v-if="showLogout == true" class="flex items-center py-1 px-1 h-10 bg-white border-2 border-purple text-purple hover:bg-purple hover:text-white rounded-lg no-underline focus:outline-none">
 		            <span class="px-3">Logout</span>
 		        </button>
 			</div>
