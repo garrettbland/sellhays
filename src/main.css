@@ -61,7 +61,6 @@
 }
 
 /* Trix Customizations */
-.trix-button--icon-increase-nesting-level { display: none; }
-.trix-button--icon-decrease-nesting-level { display: none; }
-.trix-button--icon-code { display: none; }
-.trix-button--icon-quote { display: none; }
+.trix-container.trix-editor{
+	@apply w-full bg-grey-light p-3 text-2xl text-black rounded-lg border-2 border-transparent text-2xl
+}

@@ -26,7 +26,7 @@
 		    		<div>
 		    			Address
 		    		</div>
-		      		<input v-model="sale.address" placeholder="Street Address" class="w-full bg-grey-light p-3 text-2xl text-black rounded-lg focus:outline-none border-2 border-transparent hover:border-grey focus:border-grey"/>
+		      		<input v-model="sale.address" placeholder="Street Address" class="w-full bg-grey-light p-3 text-2xl text-black rounded-lg focus:outline-none focus:bg-white border-2 border-transparent hover:border-grey focus:border-grey"/>
 		      	</div>
 		      	<div class="w-2/5">
 		      		<div>
@@ -44,26 +44,26 @@
 		    		<div>
 		    			Date of Sale
 		    		</div>
-		      		<input v-model="sale.date.start" placeholder="Aug 5, 2019" class="w-full bg-grey-light p-3 text-2xl text-black rounded-lg focus:outline-none border-2 border-transparent hover:border-grey focus:border-grey"/>
+		      		<input v-model="sale.date.start" placeholder="Aug 5, 2019" class="w-full bg-grey-light p-3 text-2xl text-black rounded-lg focus:outline-none focus:bg-white border-2 border-transparent hover:border-grey focus:border-grey"/>
 		      	</div>
 		      	<div class="w-1/4 pr-4">
 		      		<div>
 		    			Start Time
 		    		</div>
-		      		<input v-model="sale.time.start" placeholder="2:00 PM" class="w-full bg-grey-light p-3 text-2xl text-black rounded-lg focus:outline-none border-2 border-transparent hover:border-grey focus:border-grey"/>
+		      		<input v-model="sale.time.start" placeholder="2:00 PM" class="w-full bg-grey-light p-3 text-2xl text-black rounded-lg focus:outline-none focus:bg-white border-2 border-transparent hover:border-grey focus:border-grey"/>
 		      	</div>
 		      	<div class="w-1/4">
 		      		<div>
 		    			End Time
 		    		</div>
-		      		<input v-model="sale.time.end" placeholder="7:00 PM" class="w-full bg-grey-light p-3 text-2xl text-black rounded-lg focus:outline-none border-2 border-transparent hover:border-grey focus:border-grey"/>
+		      		<input v-model="sale.time.end" placeholder="7:00 PM" class="w-full bg-grey-light p-3 text-2xl text-black rounded-lg focus:outline-none focus:bg-white border-2 border-transparent hover:border-grey focus:border-grey"/>
 		      	</div>
 		    </div>
 
 		    <!-- row -->
 		    <div class="flex justify-between items-center mt-8">
 		      	<div class="w-full">
-		      		<VueTrix v-model="sale.description" placeholder="Description of your sale" class="text-2xl" @trix-file-accept.prevent/>
+		      		<VueTrix v-model="sale.description" placeholder="Description of your sale" @trix-file-accept.prevent/>
 		      	</div>
 		    </div>
 
@@ -304,3 +304,19 @@ export default {
 	}
 }
 </script>
+
+<style>
+.trix-container{
+	@apply text-xl
+}
+.trix-button--icon-increase-nesting-level,.trix-button--icon-decrease-nesting-level,.trix-button--icon-code,.trix-button--icon-quote { display: none; }
+.trix-content{
+	@apply w-full bg-grey-light p-3 text-2xl text-black rounded-lg border-2 border-transparent 
+}
+.trix-content:hover{
+	@apply border-grey
+}
+.trix-content:focus{
+	@apply outline-none bg-white border-grey
+}
+</style>
