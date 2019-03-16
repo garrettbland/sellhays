@@ -62,15 +62,15 @@
 
 /* Trix Customizations */
 .trix-container.trix-editor{
-	@apply w-full bg-grey-light p-3 text-2xl text-black rounded-lg border-2 border-transparent text-2xl
+	@apply w-full bg-grey-light p-3 text-2xl text-black rounded-lg border-2 border-transparent text-lg
 }
 
 .trix-container{
-	@apply text-xl
+	@apply text-lg
 }
 .trix-button--icon-increase-nesting-level,.trix-button--icon-decrease-nesting-level,.trix-button--icon-code,.trix-button--icon-quote { display: none; }
 .trix-content{
-	@apply w-full bg-grey-light p-3 text-2xl text-black rounded-lg border-2 border-transparent 
+	@apply w-full bg-grey-light p-3 text-lg text-black rounded-lg border-2 border-transparent 
 }
 .trix-content:hover{
 	@apply border-grey

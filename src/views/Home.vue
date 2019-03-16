@@ -22,21 +22,27 @@
 		      			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-5 icon-calendar mr-1"><path class="calendar-primary" d="M5 4h14a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6c0-1.1.9-2 2-2zm0 5v10h14V9H5z"></path><path class="calendar-secondary" d="M7 2a1 1 0 0 1 1 1v3a1 1 0 1 1-2 0V3a1 1 0 0 1 1-1zm10 0a1 1 0 0 1 1 1v3a1 1 0 0 1-2 0V3a1 1 0 0 1 1-1z"></path></svg>
 		      		</div>
 		          <div class="text-sm mr-4">
-		          	{{sale.date.start}}
+		          	{{sale.date_start}}
 		          </div> 
 		          <div>
 		          	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-5 icon-time mr-1"><circle cx="12" cy="12" r="10" class="clock-primary"></circle><path class="clock-secondary" d="M13 11.59l3.2 3.2a1 1 0 0 1-1.4 1.42l-3.5-3.5A1 1 0 0 1 11 12V7a1 1 0 0 1 2 0v4.59z"></path></svg>
 		          </div>
 		          <div class="text-sm">
-		          	{{sale.time.start}} - {{sale.time.end}}
+		          	{{sale.time_start}} - {{sale.time_end}}
 		          </div>
 		      </div>
 		      <div class="text-2xl sm:text-2xl md:text-3xl font-bold">
 		        {{sale.address}}
 		      </div>
 		      <div class="flex items-center mt-2">
-			    <div v-for="(tag,index) in sale.tags" v-if="index < 3" :key="index" class="bg-green text-green-darkest px-2 py-1 rounded-full text-xs mr-1">
-		 	     {{tag | capitalize}}
+			    <div class="bg-green text-green-darkest px-2 py-1 rounded-full text-xs mr-1">
+		 	     {{sale.category_1 | capitalize}}
+		 	    </div>
+		 	    <div class="bg-green text-green-darkest px-2 py-1 rounded-full text-xs mr-1">
+		 	     {{sale.category_2 | capitalize}}
+		 	    </div>
+		 	    <div class="bg-green text-green-darkest px-2 py-1 rounded-full text-xs mr-1">
+		 	     {{sale.category_3 | capitalize}}
 		 	    </div>
 			  </div>
 		    </div>
@@ -92,10 +98,13 @@ export default {
 				querySnapshot.forEach(doc => {
 					state.sales.push({
 						id:doc.id,
-						date:doc.data().date,
-						time:doc.data().time,
+						date_start:doc.data().date_start,
+						time_start:doc.data().time_start,
+						time_end:doc.data().time_end,
 						address:doc.data().address,
-						tags:doc.data().tags,
+						category_1:doc.data().category_1,
+						category_2:doc.data().category_2,
+						category_3:doc.data().category_3,
 						images:doc.data().images
 					})
 				})

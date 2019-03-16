@@ -14,7 +14,7 @@
 			<ul>
 				<li>
 					<div>
-						{{sale.date.start}}
+						{{sale.date_start}}
 					</div>
 					<div>
 						{{sale.address}}
@@ -23,9 +23,11 @@
 
 					</div>
 					<div>
-						Tags
+						Categories
 						<ul>
-							<li v-for="(tag,index) in sale.tags" :key="index">{{tag}}</li>
+							<li>{{sale.category_1}}</li>
+							<li>{{sale.category_2}}</li>
+							<li>{{sale.category_3}}</li>
 						</ul>
 					</div>
 					<div>

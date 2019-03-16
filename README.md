@@ -23,6 +23,7 @@
 - [ ] ~~Create whole app loading indicator~~
 - [x] Create empty list component
 - [x] Tighten down permissions server/firebase side
+- [ ] Make mobile friendly
 - [ ] Make the whole thing look super polished 😎
 
 ### To Do for v2.0

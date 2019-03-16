@@ -16,7 +16,7 @@
 			description="Post your garage sale for free"
 		/>
 		    
-		    
+		   <form @submit.prevent="submit"/>
 		  <div class="max-w-xl mx-auto bg-white p-4 rounded-lg shadow-lg -mt-6 font-sans">
 		    <div class="flex flex-col">
 
@@ -24,15 +24,15 @@
 		    <div class="flex justify-between items-center">
 		    	<div class="w-3/5 pr-4">
 		    		<div class="text-grey-dark uppercase text-sm px-2 py-2">
-		    			Address
+		    			Address <span v-if="sale.address == ''" class="text-red">Required</span>
 		    		</div>
-		      		<input v-model="sale.address" placeholder="Street Address" class="w-full bg-grey-light p-3 text-2xl text-black rounded-lg focus:outline-none focus:bg-white border-2 border-transparent hover:border-grey focus:border-grey"/>
+		      		<input v-model="sale.address" placeholder="Street Address" class="w-full bg-grey-light p-3 text-lg text-black rounded-lg focus:outline-none focus:bg-white border-2 border-transparent hover:border-grey focus:border-grey" />
 		      	</div>
 		      	<div class="w-2/5">
 		      		<div class="text-grey-dark uppercase text-sm px-2 py-2">
 		    			City
 		    		</div>
-		      		<div class="flex bg-grey-lighter p-3 text-2xl text-grey-darker opacity-75 rounded-lg focus:outline-none border-2 border-transparent">
+		      		<div class="flex bg-grey-lighter p-3 text-lg text-grey-darker opacity-75 rounded-lg focus:outline-none border-2 border-transparent">
 			        	Hays, Kansas 67601
 			     	</div>
 		      	</div>
@@ -42,73 +42,72 @@
 		    <div class="flex justify-between items-center mt-8">
 		    	<div class="w-1/2 pr-4">
 		    		<div class="text-grey-dark uppercase text-sm px-2 py-2">
-		    			Date of Sale
+		    			Date of Sale <span v-if="sale.date_start == ''" class="text-red">Required</span>
 		    		</div>
-		      		<input v-model="sale.date.start" placeholder="Aug 5, 2019" class="w-full bg-grey-light p-3 text-2xl text-black rounded-lg focus:outline-none focus:bg-white border-2 border-transparent hover:border-grey focus:border-grey"/>
+		      		<input v-model="sale.date_start" placeholder="Aug 5, 2019" class="w-full bg-grey-light p-3 text-lg text-black rounded-lg focus:outline-none focus:bg-white border-2 border-transparent hover:border-grey focus:border-grey" />
 		      	</div>
 		      	<div class="w-1/4 pr-4">
 		      		<div class="text-grey-dark uppercase text-sm px-2 py-2">
-		    			Start Time
+		    			Start Time <span v-if="sale.time_start == ''" class="text-red">Required</span>
 		    		</div>
-		      		<input v-model="sale.time.start" placeholder="2:00 PM" class="w-full bg-grey-light p-3 text-2xl text-black rounded-lg focus:outline-none focus:bg-white border-2 border-transparent hover:border-grey focus:border-grey"/>
+		      		<input v-model="sale.time_start" placeholder="2:00 PM" class="w-full bg-grey-light p-3 text-lg text-black rounded-lg focus:outline-none focus:bg-white border-2 border-transparent hover:border-grey focus:border-grey" />
 		      	</div>
 		      	<div class="w-1/4">
 		      		<div class="text-grey-dark uppercase text-sm px-2 py-2">
-		    			End Time
+		    			End Time <span v-if="sale.time_end == ''" class="text-red">Required</span>
 		    		</div>
-		      		<input v-model="sale.time.end" placeholder="7:00 PM" class="w-full bg-grey-light p-3 text-2xl text-black rounded-lg focus:outline-none focus:bg-white border-2 border-transparent hover:border-grey focus:border-grey"/>
+		      		<input v-model="sale.time_end" placeholder="7:00 PM" class="w-full bg-grey-light p-3 text-lg text-black rounded-lg focus:outline-none focus:bg-white border-2 border-transparent hover:border-grey focus:border-grey" />
 		      	</div>
 		    </div>
 
 		   	<!-- row -->
-
 		    <div class="flex flex-col mt-8">
 	    		<div class="text-grey-dark uppercase text-sm p-2">
-	    			Categories that best represent your sale
+	    			Categories <span v-if="sale.category_1 == ''" class="text-red">(1) category required</span>
 	    		</div>
 		    	<div class="flex justify-between items-center">
 		      		<div class="w-1/3 pr-4">
 			      		<div class="inline-block relative w-full">
-						  <select v-model="sale.tags[0]" placeholder="Select Category" class="block appearance-none w-full bg-grey-light p-3 pr-8 text-2xl text-black rounded-lg focus:outline-none focus:bg-white border-2 border-transparent hover:border-grey focus:border-grey">
+						  <select v-model="sale.category_1" placeholder="Select Category" class="block appearance-none w-full bg-grey-light p-3 pr-8 text-lg text-black rounded-lg focus:outline-none focus:bg-white border-2 border-transparent hover:border-grey focus:border-grey">
 						  	<option selected disabled value="">Select Category</option>
 						    <option v-for="category in categories.categories"
-						        :selected="category == sale.tags[0] ? 'selected' : ''"
+						        :selected="category == sale.category_1 ? 'selected' : ''"
 						        :value="category">
 						       {{ category | capitalize }}
 						    </option>
 						  </select>
 						  <div class="pointer-events-none absolute pin-y pin-r flex items-center px-2 text-grey-darker">
-						    <svg class="fill-current h-8 w-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+						    <svg class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
 						  </div>
 						</div>
 					</div>
 		      		<div class="w-1/3 pr-4">
 			      		<div class="inline-block relative w-full">
-						  <select v-model="sale.tags[1]" class="block appearance-none w-full bg-grey-light p-3 pr-8 text-2xl text-black rounded-lg focus:outline-none focus:bg-white border-2 border-transparent hover:border-grey focus:border-grey">
+						  <select v-model="sale.category_2" class="block appearance-none w-full bg-grey-light p-3 pr-8 text-lg text-black rounded-lg focus:outline-none focus:bg-white border-2 border-transparent hover:border-grey focus:border-grey" >
 						  	<option selected disabled value="">Select Category</option>
 						    <option v-for="category in categories.categories"
-						        :selected="category == sale.tags[0] ? 'selected' : ''"
+						        :selected="category == sale.category_2 ? 'selected' : ''"
 						        :value="category">
 						       {{ category | capitalize }}
 						    </option>
 						  </select>
 						  <div class="pointer-events-none absolute pin-y pin-r flex items-center px-2 text-grey-darker">
-						    <svg class="fill-current h-8 w-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+						    <svg class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
 						  </div>
 						</div>
 					</div>
 		      		<div class="w-1/3">
 			      		<div class="inline-block relative w-full">
-						  <select v-model="sale.tags[2]" class="block appearance-none w-full bg-grey-light p-3 pr-8 text-2xl text-black rounded-lg focus:outline-none focus:bg-white border-2 border-transparent hover:border-grey focus:border-grey">
+						  <select v-model="sale.category_3" class="block appearance-none w-full bg-grey-light p-3 pr-8 text-lg text-black rounded-lg focus:outline-none focus:bg-white border-2 border-transparent hover:border-grey focus:border-grey">
 						  	<option selected disabled value="">Select Category</option>
 						    <option v-for="category in categories.categories"
-						        :selected="category == sale.tags[0] ? 'selected' : ''"
+						        :selected="category == sale.category_3 ? 'selected' : ''"
 						        :value="category">
 						       {{ category | capitalize }}
 						    </option>
 						  </select>
 						  <div class="pointer-events-none absolute pin-y pin-r flex items-center px-2 text-grey-darker">
-						    <svg class="fill-current h-8 w-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+						    <svg class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
 						  </div>
 						</div>
 					</div>
@@ -117,6 +116,7 @@
 
 		    <!-- row -->
 		    <div class="flex justify-between items-center mt-8">
+
 		      	<div class="w-full">
 		      		<VueTrix v-model="sale.description" placeholder="Description of your sale, popular items, contact info, ect" @trix-file-accept.prevent/>
 		      	</div>
@@ -131,9 +131,9 @@
 	    		</div>
 	    		<div class="flex flex-wrap">
 			      <div class="w-1/3 px-2" v-for="(image,index) in tempImages">
-			      	<div class="flex justify-center bg-grey-lightest rounded-lg relative">
+			      	<div class="flex justify-center rounded-lg relative">
 			      		<div>
-			      			<img :src="getImage(image)" class="z-10 shadow-md rounded-lg"/>
+			      			<img :src="getImage(image)" class="z-10 shadow-md rounded-lg bg-white"/>
 							<button @click="removeImage(index)" class="absolute pin-t pin-l z-20 hover:opacity-50 focus:outline-none outline-none cursor-pointer">
 								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-8 icon-close-circle"><circle cx="12" cy="12" r="10" class="trash-primary"></circle><path class="secondary" d="M13.41 12l2.83 2.83a1 1 0 0 1-1.41 1.41L12 13.41l-2.83 2.83a1 1 0 1 1-1.41-1.41L10.59 12 7.76 9.17a1 1 0 0 1 1.41-1.41L12 10.59l2.83-2.83a1 1 0 0 1 1.41 1.41L13.41 12z"></path></svg>
 							</button>
@@ -155,7 +155,7 @@
 		  </div>
 
 		<div class="max-w-xl mx-auto flex justify-end font-sans mb-12">
-			<button @click="createSale()" class="flex items-center px-2 h-12 bg-purple border-2 border-transparent hover:bg-purple-dark rounded-lg no-underline focus:outline-none shadow-lg mt-4">
+			<button type="submit" @click="validate()" class="flex items-center px-2 h-12 bg-purple border-2 border-transparent hover:bg-purple-dark rounded-lg no-underline focus:outline-none mt-4">
 				<span class="px-3 text-white text-xl">Submit</span>
 
 				<svg v-if="!$store.state.loading" width="1.8rem"  height="1.8rem" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-8"><path class="secondary" d="M10 14.59l6.3-6.3a1 1 0 0 1 1.4 1.42l-7 7a1 1 0 0 1-1.4 0l-3-3a1 1 0 0 1 1.4-1.42l2.3 2.3z"></path></svg>
@@ -164,7 +164,7 @@
 
 			</button>
 		</div>
-
+		</form>
 	</div>
 </template>
 
@@ -190,21 +190,17 @@ export default {
 			categories,
 			tag:'',
 			tempImages:[],
-			promises:[],
 			sale:{
-				date:{
-					start:null,
-					end:null,
-				},
-				time:{
-					start:null,
-					end:null,
-				},
 				address:null,
+				date_start:null,
+				time_start:null,
+				time_end:null,
 				description:null,
 				uid:null,
 				images:[],
-				tags:[],
+				category_1:null,
+				category_2:null,
+				category_3:null,
 			},
 			successfulModal:false,
 			recentlyCreatedSaleId:null
@@ -213,6 +209,7 @@ export default {
 	methods:{
 		chooseImage(){
 
+			// Find reference id in template and simulate a click
 			this.$refs.addImage.click()
 
 		},
@@ -241,19 +238,25 @@ export default {
 			this.tempImages.splice(index, 1);
 
 	    },
-		addTag(){
+		validate(){
 
-			// Adds tag to sales tag array and resets input box
-			if(this.tag !== ''){
-				this.sale.tags.push(this.tag)
-				this.tag = ''
+			// Set state so we can use variable within firebase functions
+			var state = this
+
+			var errors = []
+			const requiredFields = ['address','date_start','time_start','time_end','category_1']
+
+			requiredFields.forEach(function(field){
+				if(state.sale[field] == null || state.sale[field] == ""){
+					state.sale[field] = ""
+					errors.push(field)
+				}
+			})
+
+			console.log('errors number...'+errors.length)
+			if(errors.length == 0){
+				this.createSale()
 			}
-		},
-		removeTag(index){
-
-			// Removes tag from sales tag array
-			this.sale.tags.splice(index, 1);
-
 		},
 		createSale(){
 
@@ -327,19 +330,16 @@ export default {
 
 				// Reset form
 				state.sale = {
-					date:{
-						start:null,
-						end:null
-					},
-					time:{
-						start:null,
-						end:null
-					},
 					address:null,
+					date_start:null,
+					time_start:null,
+					time_end:null,
 					description:null,
 					uid:uid,
 					images:[],
-					tags:[]
+					category_1:null,
+					category_2:null,
+					category_3:null,
 				}
 
 				// Reset temp images
@@ -364,7 +364,10 @@ export default {
 		}
 	},
 	mounted(){
+
+		// Set sale user id
 		this.sale.uid = this.$store.state.currentUser.uid
+
 	},
 	filters: {
 	  capitalize: function (value) {
