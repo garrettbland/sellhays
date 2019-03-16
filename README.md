@@ -14,13 +14,14 @@
 - [x] Setup global loading indicator in vuex
 - [x] Setup popups or modals for alerts
 - [x] Setup deleting sale along with images in storage
-- [ ] Setup limited tag list & limit tags
+- [ ] ~~Setup limited tag list & limit tags~~
 - [ ] Setup simple breadcrumb navigation? 
 - [ ] Setup date picker
 - [ ] Setup image compression
+- [ ] Setup form validation and sanitization
 - [x] Add trix editor to description for rich text editing
-- [ ] Create whole app loading indicator
-- [ ] Create empty list component
+- [ ] ~~Create whole app loading indicator~~
+- [x] Create empty list component
 - [x] Tighten down permissions server/firebase side
 - [ ] Make the whole thing look super polished 😎
 

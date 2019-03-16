@@ -64,3 +64,17 @@
 .trix-container.trix-editor{
 	@apply w-full bg-grey-light p-3 text-2xl text-black rounded-lg border-2 border-transparent text-2xl
 }
+
+.trix-container{
+	@apply text-xl
+}
+.trix-button--icon-increase-nesting-level,.trix-button--icon-decrease-nesting-level,.trix-button--icon-code,.trix-button--icon-quote { display: none; }
+.trix-content{
+	@apply w-full bg-grey-light p-3 text-2xl text-black rounded-lg border-2 border-transparent 
+}
+.trix-content:hover{
+	@apply border-grey
+}
+.trix-content:focus{
+	@apply outline-none bg-white border-grey
+}

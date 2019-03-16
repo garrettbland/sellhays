@@ -60,12 +60,69 @@
 		      	</div>
 		    </div>
 
+		   	<!-- row -->
+
+		    <div class="flex flex-col mt-8">
+	    		<div class="text-grey-dark uppercase text-sm p-2">
+	    			Categories that best represent your sale
+	    		</div>
+		    	<div class="flex justify-between items-center">
+		      		<div class="w-1/3 pr-4">
+			      		<div class="inline-block relative w-full">
+						  <select v-model="sale.tags[0]" placeholder="Select Category" class="block appearance-none w-full bg-grey-light p-3 pr-8 text-2xl text-black rounded-lg focus:outline-none focus:bg-white border-2 border-transparent hover:border-grey focus:border-grey">
+						  	<option selected disabled value="">Select Category</option>
+						    <option v-for="category in categories.categories"
+						        :selected="category == sale.tags[0] ? 'selected' : ''"
+						        :value="category">
+						       {{ category | capitalize }}
+						    </option>
+						  </select>
+						  <div class="pointer-events-none absolute pin-y pin-r flex items-center px-2 text-grey-darker">
+						    <svg class="fill-current h-8 w-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+						  </div>
+						</div>
+					</div>
+		      		<div class="w-1/3 pr-4">
+			      		<div class="inline-block relative w-full">
+						  <select v-model="sale.tags[1]" class="block appearance-none w-full bg-grey-light p-3 pr-8 text-2xl text-black rounded-lg focus:outline-none focus:bg-white border-2 border-transparent hover:border-grey focus:border-grey">
+						  	<option selected disabled value="">Select Category</option>
+						    <option v-for="category in categories.categories"
+						        :selected="category == sale.tags[0] ? 'selected' : ''"
+						        :value="category">
+						       {{ category | capitalize }}
+						    </option>
+						  </select>
+						  <div class="pointer-events-none absolute pin-y pin-r flex items-center px-2 text-grey-darker">
+						    <svg class="fill-current h-8 w-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+						  </div>
+						</div>
+					</div>
+		      		<div class="w-1/3">
+			      		<div class="inline-block relative w-full">
+						  <select v-model="sale.tags[2]" class="block appearance-none w-full bg-grey-light p-3 pr-8 text-2xl text-black rounded-lg focus:outline-none focus:bg-white border-2 border-transparent hover:border-grey focus:border-grey">
+						  	<option selected disabled value="">Select Category</option>
+						    <option v-for="category in categories.categories"
+						        :selected="category == sale.tags[0] ? 'selected' : ''"
+						        :value="category">
+						       {{ category | capitalize }}
+						    </option>
+						  </select>
+						  <div class="pointer-events-none absolute pin-y pin-r flex items-center px-2 text-grey-darker">
+						    <svg class="fill-current h-8 w-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+						  </div>
+						</div>
+					</div>
+				</div>
+		    </div>
+
 		    <!-- row -->
 		    <div class="flex justify-between items-center mt-8">
 		      	<div class="w-full">
 		      		<VueTrix v-model="sale.description" placeholder="Description of your sale, popular items, contact info, ect" @trix-file-accept.prevent/>
 		      	</div>
 		    </div>
+
+
 
 		   	<!-- row -->
 		    <div class="flex flex-col mt-8">
@@ -85,7 +142,7 @@
 			      </div>
 			      <div class="w-1/3 px-2" v-if="tempImages.length < 3">
 		      		<div class="flex justify-center bg-grey-lightest border-2 border-dashed border-grey rounded-lg hover:border-purple cursor-pointer" @click="chooseImage()">
-		      			<div class="py-12 text-grey-darker opacity-75">
+		      			<div class="py-16 text-grey-darker opacity-75">
 		      				Click here to add image
 		      				<input type="file" ref="addImage" hidden @change="onFileChange">
 		      			</div>
@@ -93,24 +150,18 @@
 		      	  </div>
 			    </div>
 		    </div>
-
-		    <!-- row -->
-<!-- 		    <div class="flex justify-between items-center mt-8">
-		      	<div class="w-full">
-		      		<input v-model="tag" placeholder="tag"><button @click="addTag()">Add +</button>
-					<ul>
-						<li v-for="(tag,index) in sale.tags">{{tag}} <button @click="removeTag(index)">X</button></li>
-					</ul>
-		      	</div>
-		    </div> -->
     
 		    </div>
 		  </div>
 
 		<div class="max-w-xl mx-auto flex justify-end font-sans mb-12">
-			<button @click="createSale()" class="flex items-center p-2 bg-purple border-2 border-transparent hover:bg-purple-dark rounded-lg no-underline focus:outline-none shadow-lg mt-4">
+			<button @click="createSale()" class="flex items-center px-2 h-12 bg-purple border-2 border-transparent hover:bg-purple-dark rounded-lg no-underline focus:outline-none shadow-lg mt-4">
 				<span class="px-3 text-white text-xl">Submit</span>
-					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-8 icon-check"><circle cx="12" cy="12" r="10" class="primary"></circle><path class="secondary" d="M10 14.59l6.3-6.3a1 1 0 0 1 1.4 1.42l-7 7a1 1 0 0 1-1.4 0l-3-3a1 1 0 0 1 1.4-1.42l2.3 2.3z"></path></svg>
+
+				<svg v-if="!$store.state.loading" width="1.8rem"  height="1.8rem" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-8"><path class="secondary" d="M10 14.59l6.3-6.3a1 1 0 0 1 1.4 1.42l-7 7a1 1 0 0 1-1.4 0l-3-3a1 1 0 0 1 1.4-1.42l2.3 2.3z"></path></svg>
+
+				<svg v-if="$store.state.loading" width="1.2rem"  height="1.2rem"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="w-8" preserveAspectRatio="xMidYMid" style="background: none;"><circle cx="50" cy="50" fill="none" stroke-linecap="round" r="40" stroke-width="12" stroke="#ffffff" stroke-dasharray="62.83185307179586 62.83185307179586" transform="rotate(224.113 50 50)"><animateTransform attributeName="transform" type="rotate" calcMode="linear" values="0 50 50;360 50 50" keyTimes="0;1" dur="1.2s" begin="0s" repeatCount="indefinite"></animateTransform></circle></svg>
+
 			</button>
 		</div>
 
@@ -122,7 +173,8 @@ import Navbar from '@/components/Navbar'
 import Header from '@/components/Header'
 import Actionbar from '@/components/Actionbar'
 import Modal from '@/components/Modal'
-import VueTrix from "vue-trix";
+import VueTrix from 'vue-trix';
+import categories from '@/assets/categories.json'
 export default {
 	name:'Create',
 	components:{
@@ -130,10 +182,12 @@ export default {
 		Header,
 		Actionbar,
 		Modal,
-		VueTrix
+		VueTrix,
+		categories
 	},
 	data(){
 		return {
+			categories,
 			tag:'',
 			tempImages:[],
 			promises:[],
@@ -311,22 +365,17 @@ export default {
 	},
 	mounted(){
 		this.sale.uid = this.$store.state.currentUser.uid
+	},
+	filters: {
+	  capitalize: function (value) {
+	    if (!value) return ''
+	    value = value.toString()
+	    return value.charAt(0).toUpperCase() + value.slice(1)
+	  }
 	}
 }
 </script>
 
 <style>
-.trix-container{
-	@apply text-xl
-}
-.trix-button--icon-increase-nesting-level,.trix-button--icon-decrease-nesting-level,.trix-button--icon-code,.trix-button--icon-quote { display: none; }
-.trix-content{
-	@apply w-full bg-grey-light p-3 text-2xl text-black rounded-lg border-2 border-transparent 
-}
-.trix-content:hover{
-	@apply border-grey
-}
-.trix-content:focus{
-	@apply outline-none bg-white border-grey
-}
+
 </style>
