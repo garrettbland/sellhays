@@ -3,7 +3,14 @@
 
 		<Modal title="Alert" v-if="confirmDeleteModal" @close="confirmDeleteModal = false" @confirm="deleteSale()" actionTitle="Confirm Delete">
 	      <div class="p-4">
-	      	Are you sure you want to delete this sale? This cannot be reversed.
+	      	Are you sure you want to delete this sale?
+	      </div>
+	    </Modal>
+
+	    <Modal title="Confirm" v-if="confirmAccountDeleteModal" @close="confirmAccountDeleteModal = false" @confirm="deleteAccount()" actionTitle="Confirm">
+	      <div class="p-4">
+	      	Are you sure you want to delete your account? This will unlink your social account and delete all sales and information related. This is 
+	      	permanent and cannot be recovered.
 	      </div>
 	    </Modal>
 
@@ -64,6 +71,80 @@
 				</div>
 			</div>
 
+			<!--my account-->
+			<div class="flex flex-col font-sans w-full mt-12 mx-4 sm:mx-4 md:mx-0">
+				<div class="mb-4">
+					<span class="text-2xl leading-tight">
+						My Account
+					</span>
+				</div>
+				<div class="bg-white shadow-lg rounded-lg p-4">
+					<p class="text-xl pb-2 text-black">
+						Hello <span class="font-bold">{{$store.state.currentUser.displayName}}</span>,
+					</p>
+					<p class="text-grey-darker leading-normal pb-2 mb-4">
+						Below are some account details and helpful information. If you need help with something, have comments, or found a bug, please 
+						email <a href="mailto:hello@sellhays.com">hello@sellhays.com</a> for more information.
+					</p>
+					<div class="flex flex-wrap items-center">
+
+						<!-- Email -->
+						<div class="w-full flex mb-6">
+							<div class="flex items-center mr-4">
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-10"><path class="account-primary" d="M22 8.62V18a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8.62l9.55 4.77a1 1 0 0 0 .9 0L22 8.62z"></path><path class="account-secondary" d="M12 11.38l-10-5V6c0-1.1.9-2 2-2h16a2 2 0 0 1 2 2v.38l-10 5z"></path></svg>
+							</div>
+							<div class="flex flex-col">
+								<div>
+									<span class="text-sm text-grey-darker">Email used to sign in</span>
+								</div>
+								<div class="text-black font-bold">
+									{{$store.state.currentUser.email}}
+								</div>
+							</div>
+						</div>
+
+						<!-- Last Login -->
+						<div class="w-full flex mb-6">
+							<div class="flex items-center mr-4">
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-10"><circle cx="12" cy="12" r="10" class="account-primary"></circle><path class="account-secondary" d="M13 11.59l3.2 3.2a1 1 0 0 1-1.4 1.42l-3.5-3.5A1 1 0 0 1 11 12V7a1 1 0 0 1 2 0v4.59z"></path></svg>
+							</div>
+							<div class="flex flex-col">
+								<div>
+									<span class="text-sm text-grey-darker">Last Sign In Time</span>
+								</div>
+								<div class="text-black font-bold">
+									{{$store.state.currentUser.metadata.lastSignInTime}}
+								</div>
+							</div>
+						</div>
+
+						<!-- Account Created -->
+						<div class="w-full flex mb-8">
+							<div class="flex items-center mr-4">
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-10"><path class="account-primary" d="M4 3h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2zm16 12V7a2 2 0 0 1-2-2H6a2 2 0 0 1-2 2v8a2 2 0 0 1 2 2h12c0-1.1.9-2 2-2zM8 7h8a1 1 0 0 1 0 2H8a1 1 0 1 1 0-2z"></path><path class="account-secondary" d="M11.65 18.23a4 4 0 1 1 4.7 0l2.5 3.44-2.23-.18-1.48 1.68-.59-4.2a4.04 4.04 0 0 1-1.1 0l-.6 4.2-1.47-1.68-2.23.18 2.5-3.44zM14 17a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"></path></svg>
+							</div>
+							<div class="flex flex-col">
+								<div>
+									<span class="text-sm text-grey-darker">Account Created</span>
+								</div>
+								<div class="text-black font-bold">
+									{{$store.state.currentUser.metadata.creationTime}}
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<div>
+						<p class="text-grey-darker leading-normal pb-2">
+							If you wish to delete your account and remove all sales & information related, please click the button below
+						</p>
+						<button @click="confirmAccountDelete()" class="flex items-center py-1 px-1 h-10 bg-white border-2 border-red text-red hover:bg-red hover:text-white rounded-lg no-underline focus:outline-none">
+				            <span class="px-3">Delete Account</span>
+				        </button>
+					</div>
+				</div>
+			</div>
+
 		</div>
 
 	</div>
@@ -86,6 +167,7 @@ export default {
 		return {
 			sales:null,
 			confirmDeleteModal:false,
+			confirmAccountDeleteModal:false,
 			selectedSale:null
 		}
 	},
@@ -125,6 +207,51 @@ export default {
 						uid:doc.data().uid
 					})
 				})
+
+			})
+		},
+		confirmAccountDelete(){
+			this.confirmAccountDeleteModal = true
+		},
+		async deleteAllSales(){
+
+			// Delete all sales where uid is currently logged in users uid
+			
+
+		},
+		deleteFirebaseUser(){
+			// Set state so we can use variable within firebase functions
+			var state = this
+
+			// Set user variable to currently logged in user
+			var user = state.$store.state.currentUser
+
+			// Delete user account from our authentication pool
+			user.delete().then(function() {
+
+			  	// User deleted
+			  	state.confirmAccountDeleteModal = false
+
+			  	// Sets user in vuex store
+				state.$store.dispatch('clearData')
+
+				// Sent user to home page after successful delete
+			  	state.$router.push({'name':'home'})
+
+			}).catch(function(error) {
+
+			  // An error happened.
+			  window.alert('Something went wrong deleting your account. Please try again. If problem continues, please contact us at hello@sellhays.com')
+
+			});
+		},
+		deleteAccount(){
+
+			// Delete all sales first, then delete firebase user
+			this.deleteAllSales().then(function(){
+
+				// All sales have been deleted, now delete/remove user account from firebase authentication
+				this.deleteFirebaseUser()
 
 			})
 		},
@@ -224,6 +351,8 @@ export default {
 		}
 	},
 	mounted(){
+
+		console.log(this.$store.state.currentUser)
 
 		// Set state so we can use variable within functions
 		var state = this

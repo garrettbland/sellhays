@@ -37,6 +37,14 @@
 	fill:#F3EBFF;
 }
 
+.account-primary{
+	fill:#D6BBFC;
+}
+
+.account-secondary{
+	fill:#794ACF;
+}
+
 /* Header */
 .header-background{
   background: rgb(26,21,111);
