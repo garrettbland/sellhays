@@ -16,19 +16,19 @@
 			description="Post your garage sale for free"
 		/>
 		    
-		   <form @submit.prevent="submit"/>
+		  <form @submit.prevent="validate">
 		  <div class="max-w-xl mx-auto bg-white p-4 rounded-lg shadow-lg -mt-6 font-sans">
 		    <div class="flex flex-col">
 
 		    <!-- row -->
-		    <div class="flex justify-between items-center">
-		    	<div class="w-3/5 pr-4">
+		    <div class="flex flex-wrap justify-between items-center">
+		    	<div class="w-full sm:w-full md:w-3/5 md:pr-4">
 		    		<div class="text-grey-dark uppercase text-sm px-2 py-2">
 		    			Address <span v-if="sale.address == ''" class="text-red">Required</span>
 		    		</div>
 		      		<input v-model="sale.address" placeholder="Street Address" class="w-full bg-grey-light p-3 text-lg text-black rounded-lg focus:outline-none focus:bg-white border-2 border-transparent hover:border-grey focus:border-grey" />
 		      	</div>
-		      	<div class="w-2/5">
+		      	<div class="w-full sm:w-full md:w-2/5">
 		      		<div class="text-grey-dark uppercase text-sm px-2 py-2">
 		    			City
 		    		</div>
@@ -39,20 +39,20 @@
 		    </div>
 
 		    <!-- row -->
-		    <div class="flex justify-between items-center mt-8">
-		    	<div class="w-1/2 pr-4">
+		    <div class="flex flex-wrap justify-between items-center mt-8">
+		    	<div class="w-full sm:w-full md:w-1/2 md:pr-4">
 		    		<div class="text-grey-dark uppercase text-sm px-2 py-2">
 		    			Date of Sale <span v-if="sale.date_start == ''" class="text-red">Required</span>
 		    		</div>
 		      		<input v-model="sale.date_start" placeholder="Aug 5, 2019" class="w-full bg-grey-light p-3 text-lg text-black rounded-lg focus:outline-none focus:bg-white border-2 border-transparent hover:border-grey focus:border-grey" />
 		      	</div>
-		      	<div class="w-1/4 pr-4">
+		      	<div class="w-full sm:w-full md:w-1/4 md:pr-4">
 		      		<div class="text-grey-dark uppercase text-sm px-2 py-2">
 		    			Start Time <span v-if="sale.time_start == ''" class="text-red">Required</span>
 		    		</div>
 		      		<input v-model="sale.time_start" placeholder="2:00 PM" class="w-full bg-grey-light p-3 text-lg text-black rounded-lg focus:outline-none focus:bg-white border-2 border-transparent hover:border-grey focus:border-grey" />
 		      	</div>
-		      	<div class="w-1/4">
+		      	<div class="w-full sm:w-full md:w-1/4">
 		      		<div class="text-grey-dark uppercase text-sm px-2 py-2">
 		    			End Time <span v-if="sale.time_end == ''" class="text-red">Required</span>
 		    		</div>
@@ -65,8 +65,8 @@
 	    		<div class="text-grey-dark uppercase text-sm p-2">
 	    			Categories <span v-if="sale.category_1 == ''" class="text-red">(1) category required</span>
 	    		</div>
-		    	<div class="flex justify-between items-center">
-		      		<div class="w-1/3 pr-4">
+		    	<div class="flex flex-wrap justify-between items-center">
+		      		<div class="w-full sm:w-full md:w-1/3 md:pr-4">
 			      		<div class="inline-block relative w-full">
 						  <select v-model="sale.category_1" placeholder="Select Category" class="block appearance-none w-full bg-grey-light p-3 pr-8 text-lg text-black rounded-lg focus:outline-none focus:bg-white border-2 border-transparent hover:border-grey focus:border-grey">
 						  	<option selected disabled value="">Select Category</option>
@@ -81,7 +81,7 @@
 						  </div>
 						</div>
 					</div>
-		      		<div class="w-1/3 pr-4">
+		      		<div class="w-full sm:w-full md:w-1/3 md:pr-4">
 			      		<div class="inline-block relative w-full">
 						  <select v-model="sale.category_2" class="block appearance-none w-full bg-grey-light p-3 pr-8 text-lg text-black rounded-lg focus:outline-none focus:bg-white border-2 border-transparent hover:border-grey focus:border-grey" >
 						  	<option selected disabled value="">Select Category</option>
@@ -96,7 +96,7 @@
 						  </div>
 						</div>
 					</div>
-		      		<div class="w-1/3">
+		      		<div class="w-full sm:w-full md:w-1/3">
 			      		<div class="inline-block relative w-full">
 						  <select v-model="sale.category_3" class="block appearance-none w-full bg-grey-light p-3 pr-8 text-lg text-black rounded-lg focus:outline-none focus:bg-white border-2 border-transparent hover:border-grey focus:border-grey">
 						  	<option selected disabled value="">Select Category</option>
@@ -115,12 +115,24 @@
 		    </div>
 
 		    <!-- row -->
-		    <div class="flex justify-between items-center mt-8">
-
+		    <div class="flex flex-wrap justify-between items-center mt-8">
+	    		<div class="w-full text-grey-dark uppercase text-sm px-2 py-2">
+	    			Description <span v-if="sale.description == ''" class="text-red">Required</span>
+	    		</div>
 		      	<div class="w-full">
 		      		<VueTrix v-model="sale.description" placeholder="Description of your sale, popular items, contact info, ect" @trix-file-accept.prevent/>
 		      	</div>
 		    </div>
+
+		    <!-- row -->
+<!-- 		    <div class="flex flex-wrap justify-between items-center mt-8 md:hidden">
+	    		<div class="w-full text-grey-dark uppercase text-sm px-2 py-2">
+	    			Description <span v-if="sale.description == ''" class="text-red">Required</span>
+	    		</div>
+		      	<div class="w-full">
+		      		<textarea v-model="sale.description" rows="5" placeholder="Description of your sale, popular items, contact info, ect" class="w-full bg-grey-light p-3 text-lg text-black rounded-lg focus:outline-none focus:bg-white border-2 border-transparent hover:border-grey focus:border-grey" ></textarea>
+		      	</div>
+		    </div> -->
 
 
 
@@ -130,7 +142,7 @@
 	    			Images (max of 3)
 	    		</div>
 	    		<div class="flex flex-wrap">
-			      <div class="w-1/3 px-2" v-for="(image,index) in tempImages">
+			      <div class="w-full sm:w-full md:w-1/3 px-2" v-for="(image,index) in tempImages">
 			      	<div class="flex justify-center rounded-lg relative">
 			      		<div>
 			      			<img :src="getImage(image)" class="z-10 shadow-md rounded-lg bg-white"/>
@@ -140,7 +152,7 @@
 			      		</div>
 			      	</div>
 			      </div>
-			      <div class="w-1/3 px-2" v-if="tempImages.length < 3">
+			      <div class="w-full sm:w-full md:w-1/3 px-2" v-if="tempImages.length < 3">
 		      		<div class="flex justify-center bg-grey-lightest border-2 border-dashed border-grey rounded-lg hover:border-purple cursor-pointer" @click="chooseImage()">
 		      			<div class="py-16 text-grey-darker opacity-75">
 		      				Click here to add image
@@ -154,11 +166,14 @@
 		    </div>
 		  </div>
 
-		<div class="max-w-xl mx-auto flex justify-end font-sans mb-12">
-			<button type="submit" @click="validate()" class="flex items-center px-2 h-12 bg-purple border-2 border-transparent hover:bg-purple-dark rounded-lg no-underline focus:outline-none mt-4">
+		<div class="max-w-xl mx-auto items-center flex flex-wrap sm:flex-wrap md:flex-no-wrap justify-end font-sans mb-12">
+			<div class="mt-4 mr-4 p-2 bg-red-lighter text-red-darker rounded-lg shadow-lg w-full sm:w-full" v-if="errors.length > 0">
+				Something went wrong. Please check all fields and try again
+			</div>
+			<button type="submit" class="flex justify-center sm:justify-center items-center px-2 h-12 bg-purple border-2 border-transparent hover:bg-purple-dark rounded-lg no-underline focus:outline-none mt-4">
 				<span class="px-3 text-white text-xl">Submit</span>
 
-				<svg v-if="!$store.state.loading" width="1.8rem"  height="1.8rem" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-8"><path class="secondary" d="M10 14.59l6.3-6.3a1 1 0 0 1 1.4 1.42l-7 7a1 1 0 0 1-1.4 0l-3-3a1 1 0 0 1 1.4-1.42l2.3 2.3z"></path></svg>
+				<svg v-if="!$store.state.loading" width="1.8rem" height="1.8rem" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-8"><path class="secondary" d="M10 14.59l6.3-6.3a1 1 0 0 1 1.4 1.42l-7 7a1 1 0 0 1-1.4 0l-3-3a1 1 0 0 1 1.4-1.42l2.3 2.3z"></path></svg>
 
 				<svg v-if="$store.state.loading" width="1.2rem"  height="1.2rem"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="w-8" preserveAspectRatio="xMidYMid" style="background: none;"><circle cx="50" cy="50" fill="none" stroke-linecap="round" r="40" stroke-width="12" stroke="#ffffff" stroke-dasharray="62.83185307179586 62.83185307179586" transform="rotate(224.113 50 50)"><animateTransform attributeName="transform" type="rotate" calcMode="linear" values="0 50 50;360 50 50" keyTimes="0;1" dur="1.2s" begin="0s" repeatCount="indefinite"></animateTransform></circle></svg>
 
@@ -203,7 +218,8 @@ export default {
 				category_3:null,
 			},
 			successfulModal:false,
-			recentlyCreatedSaleId:null
+			recentlyCreatedSaleId:null,
+			errors:[],
 		}
 	},
 	methods:{
@@ -238,27 +254,32 @@ export default {
 			this.tempImages.splice(index, 1);
 
 	    },
-		validate(){
+		validate(event){
 
-			// Set state so we can use variable within firebase functions
+			// Set state so we can use variable within functions
 			var state = this
 
-			var errors = []
-			const requiredFields = ['address','date_start','time_start','time_end','category_1']
+			// Reset form errors
+			state.errors = []
 
+			// Set required fields
+			const requiredFields = ['address','date_start','time_start','time_end','category_1','description']
+
+			// Loop through array and set field error if null or empty
 			requiredFields.forEach(function(field){
 				if(state.sale[field] == null || state.sale[field] == ""){
 					state.sale[field] = ""
-					errors.push(field)
+					state.errors.push(field)
 				}
 			})
 
-			console.log('errors number...'+errors.length)
-			if(errors.length == 0){
-				this.createSale()
+			// If there are no errors, create sale function
+			if(state.errors.length == 0){
+				this.createSale(event)
 			}
+
 		},
-		createSale(){
+		createSale(event){
 
 			// Set state so we can use variable within firebase functions
 			var state = this
@@ -270,7 +291,7 @@ export default {
 			// We do this so we can upload image -> grab the uploaded public URL -> save to firestore
 			state.startImageUpload().then(function(){
 
-				state.putFirestoreItem()
+				state.putFirestoreItem(event)
 
 			})
 		},
@@ -311,7 +332,7 @@ export default {
 				})
 			})
 		},
-		putFirestoreItem(){
+		putFirestoreItem(event){
 
 			// Set state so we can use variable within firebase functions
 			var state = this
@@ -329,6 +350,9 @@ export default {
 				state.recentlyCreatedSaleId = docRef.id
 
 				// Reset form
+				event.target.reset()
+
+				// Reset sale object
 				state.sale = {
 					address:null,
 					date_start:null,
@@ -378,7 +402,3 @@ export default {
 	}
 }
 </script>
-
-<style>
-
-</style>
