@@ -28,7 +28,7 @@
 		    		</div>
 		      		<input v-model="sale.address" placeholder="Street Address" class="w-full bg-grey-light p-3 text-lg text-black rounded-lg focus:outline-none focus:bg-white border-2 border-transparent hover:border-grey focus:border-grey" />
 		      	</div>
-		      	<div class="w-full sm:w-full md:w-2/5">
+		      	<div class="w-full sm:w-full md:w-2/5 pt-4 sm:pt-4 md:pt-0">
 		      		<div class="text-grey-dark uppercase text-sm px-2 py-2">
 		    			City
 		    		</div>
@@ -40,19 +40,19 @@
 
 		    <!-- row -->
 		    <div class="flex flex-wrap justify-between items-center mt-8">
-		    	<div class="w-full sm:w-full md:w-1/2 md:pr-4">
+		    	<div class="w-full sm:w-full md:w-1/2 md:pr-4 pt-4 sm:pt-4 md:pt-0">
 		    		<div class="text-grey-dark uppercase text-sm px-2 py-2">
 		    			Date of Sale <span v-if="sale.date_start == ''" class="text-red">Required</span>
 		    		</div>
 		      		<input v-model="sale.date_start" placeholder="Aug 5, 2019" class="w-full bg-grey-light p-3 text-lg text-black rounded-lg focus:outline-none focus:bg-white border-2 border-transparent hover:border-grey focus:border-grey" />
 		      	</div>
-		      	<div class="w-full sm:w-full md:w-1/4 md:pr-4">
+		      	<div class="w-full sm:w-full md:w-1/4 md:pr-4 pt-4 sm:pt-4 md:pt-0">
 		      		<div class="text-grey-dark uppercase text-sm px-2 py-2">
 		    			Start Time <span v-if="sale.time_start == ''" class="text-red">Required</span>
 		    		</div>
 		      		<input v-model="sale.time_start" placeholder="2:00 PM" class="w-full bg-grey-light p-3 text-lg text-black rounded-lg focus:outline-none focus:bg-white border-2 border-transparent hover:border-grey focus:border-grey" />
 		      	</div>
-		      	<div class="w-full sm:w-full md:w-1/4">
+		      	<div class="w-full sm:w-full md:w-1/4 pt-4 sm:pt-4 md:pt-0">
 		      		<div class="text-grey-dark uppercase text-sm px-2 py-2">
 		    			End Time <span v-if="sale.time_end == ''" class="text-red">Required</span>
 		    		</div>
@@ -66,7 +66,7 @@
 	    			Categories <span v-if="sale.category_1 == ''" class="text-red">(1) category required</span>
 	    		</div>
 		    	<div class="flex flex-wrap justify-between items-center">
-		      		<div class="w-full sm:w-full md:w-1/3 md:pr-4">
+		      		<div class="w-full sm:w-full md:w-1/3 md:pr-4 mb-2 sm:mb-2 md:mb-0 pt-4 sm:pt-4 md:pt-0">
 			      		<div class="inline-block relative w-full">
 						  <select v-model="sale.category_1" placeholder="Select Category" class="block appearance-none w-full bg-grey-light p-3 pr-8 text-lg text-black rounded-lg focus:outline-none focus:bg-white border-2 border-transparent hover:border-grey focus:border-grey">
 						  	<option selected disabled value="">Select Category</option>
@@ -81,7 +81,7 @@
 						  </div>
 						</div>
 					</div>
-		      		<div class="w-full sm:w-full md:w-1/3 md:pr-4">
+		      		<div class="w-full sm:w-full md:w-1/3 md:pr-4 mb-2 sm:mb-2 md:mb-0 pt-4 sm:pt-4 md:pt-0">
 			      		<div class="inline-block relative w-full">
 						  <select v-model="sale.category_2" class="block appearance-none w-full bg-grey-light p-3 pr-8 text-lg text-black rounded-lg focus:outline-none focus:bg-white border-2 border-transparent hover:border-grey focus:border-grey" >
 						  	<option selected disabled value="">Select Category</option>
@@ -96,7 +96,7 @@
 						  </div>
 						</div>
 					</div>
-		      		<div class="w-full sm:w-full md:w-1/3">
+		      		<div class="w-full sm:w-full md:w-1/3 pt-4 sm:pt-4 md:pt-0">
 			      		<div class="inline-block relative w-full">
 						  <select v-model="sale.category_3" class="block appearance-none w-full bg-grey-light p-3 pr-8 text-lg text-black rounded-lg focus:outline-none focus:bg-white border-2 border-transparent hover:border-grey focus:border-grey">
 						  	<option selected disabled value="">Select Category</option>
@@ -142,7 +142,7 @@
 	    			Images (max of 3)
 	    		</div>
 	    		<div class="flex flex-wrap">
-			      <div class="w-full sm:w-full md:w-1/3 px-2" v-for="(image,index) in tempImages">
+			      <div class="w-full sm:w-full md:w-1/3 px-2 pb-2 sm:pb-2 md:pb-0" v-for="(image,index) in tempImages">
 			      	<div class="flex justify-center rounded-lg relative">
 			      		<div>
 			      			<img :src="getImage(image)" class="z-10 shadow-md rounded-lg bg-white"/>
@@ -166,8 +166,8 @@
 		    </div>
 		  </div>
 
-		<div class="max-w-xl mx-auto items-center flex flex-wrap sm:flex-wrap md:flex-no-wrap justify-end font-sans mb-12">
-			<div class="mt-4 mr-4 p-2 bg-red-lighter text-red-darker rounded-lg shadow-lg w-full sm:w-full" v-if="errors.length > 0">
+		<div class="max-w-xl mx-auto items-center flex flex-wrap sm:flex-wrap md:flex-no-wrap justify-center sm:justify-center md:justify-end font-sans mb-12 p-4 sm:p-4 md:p-0">
+			<div class="mt-4 md:mr-4 p-2 bg-red-lighter text-red-darker rounded-lg shadow-lg w-full sm:w-full md:w-auto" v-if="errors.length > 0">
 				Something went wrong. Please check all fields and try again
 			</div>
 			<button type="submit" class="flex justify-center sm:justify-center items-center px-2 h-12 bg-purple border-2 border-transparent hover:bg-purple-dark rounded-lg no-underline focus:outline-none mt-4">
