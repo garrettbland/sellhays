@@ -31,7 +31,7 @@
 						{{$store.state.currentUser.displayName}}
 					</div>
 					<div>
-						<img :src="$store.state.currentUser.photoURL" alt="Profile Image" class="w-12 h-12 rounded-full"/>
+						<img :src="$store.state.currentUser.photoURL" alt="Profile Image" class="w-12 h-12 rounded-full shadow-md"/>
 					</div>
 				</router-link>
 			</div>
