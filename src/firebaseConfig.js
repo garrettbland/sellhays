@@ -27,6 +27,7 @@ const facebook = new firebase.auth.FacebookAuthProvider()
 const sales = db.collection('sales')
 
 export {
+    db,
     auth,
     currentUser,
     storage,

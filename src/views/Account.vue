@@ -7,10 +7,16 @@
 	      </div>
 	    </Modal>
 
-	    <Modal title="Confirm" v-if="confirmAccountDeleteModal" @close="confirmAccountDeleteModal = false" @confirm="deleteAccount()" actionTitle="Confirm">
+	    <Modal title="Confirm" v-if="confirmAccountDeleteModal" @close="confirmAccountDeleteModal = false" @confirm="deleteFirebaseUser()" actionTitle="Confirm">
 	      <div class="p-4">
-	      	Are you sure you want to delete your account? This will unlink your social account and delete all sales and information related. This is 
-	      	permanent and cannot be recovered.
+	      	Are you sure you want to delete your account? This will unlink your social account and cannot be recovered.
+	      </div>
+	    </Modal>
+
+	   	<Modal title="Error" v-if="deleteUserErrorModal" @close="deleteUserErrorModal = false">
+	      <div class="p-4">
+	      	There was a problem with fully deleting your account. For security purposes, please logout and then log back in and retry. If problem persists,
+	      	please contact hello@sellhays.com.
 	      </div>
 	    </Modal>
 
@@ -136,10 +142,10 @@
 					</div>
 					<div>
 						<p class="text-grey-darker leading-normal pb-2">
-							If you wish to delete your account and remove all sales & information related, please click the button below
+							If you wish to delete your account and remove all sales & information related, please click the button below. <span class="font-bold">All sales must be deleted prior.</span>
 						</p>
-						<button @click="confirmAccountDelete()" class="flex items-center py-1 px-1 h-10 bg-white border-2 border-red text-red hover:bg-red hover:text-white rounded-lg no-underline focus:outline-none">
-				            <span class="px-3">Delete Account</span>
+						<button @click="confirmAccountDelete()" v-bind:class="deleteButtonStyling()" class="flex items-center py-1 px-1 h-10 bg-white border-2 rounded-lg no-underline focus:outline-none">
+				        	<span class="px-3">Delete Account</span>
 				        </button>
 					</div>
 				</div>
@@ -168,10 +174,21 @@ export default {
 			sales:null,
 			confirmDeleteModal:false,
 			confirmAccountDeleteModal:false,
+			deleteUserErrorModal:false,
 			selectedSale:null
 		}
 	},
 	methods:{
+		deleteButtonStyling(){
+
+			// If there are sales present, disable the button
+			if(this.sales.length > 0){
+				return 'disabled text-grey-dark border-grey-dark cursor-not-allowed'
+			}else{
+				return 'border-red text-red hover:bg-red hover:text-white'
+			}
+
+		},
 		viewSale(saleId){
 
 			// Send user to sale detail view with params
@@ -211,15 +228,15 @@ export default {
 			})
 		},
 		confirmAccountDelete(){
-			this.confirmAccountDeleteModal = true
-		},
-		async deleteAllSales(){
 
-			// Delete all sales where uid is currently logged in users uid
-			
+			// If there are no sales, allow user to delete account
+			if(this.sales.length <= 0){
+				this.confirmAccountDeleteModal = true
+			}
 
 		},
 		deleteFirebaseUser(){
+
 			// Set state so we can use variable within firebase functions
 			var state = this
 
@@ -241,19 +258,11 @@ export default {
 			}).catch(function(error) {
 
 			  // An error happened.
-			  window.alert('Something went wrong deleting your account. Please try again. If problem continues, please contact us at hello@sellhays.com')
+			  // If this error fired, its probably because of the 'recently authenticated thing'
+			  // Alert to the user that they need to log out/in and try again
+			  state.deleteUserErrorModal = true
 
 			});
-		},
-		deleteAccount(){
-
-			// Delete all sales first, then delete firebase user
-			this.deleteAllSales().then(function(){
-
-				// All sales have been deleted, now delete/remove user account from firebase authentication
-				this.deleteFirebaseUser()
-
-			})
 		},
 		confirmDelete(sale){
 
@@ -351,8 +360,6 @@ export default {
 		}
 	},
 	mounted(){
-
-		console.log(this.$store.state.currentUser)
 
 		// Set state so we can use variable within functions
 		var state = this

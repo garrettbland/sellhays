@@ -14,7 +14,8 @@
 - [x] Setup global loading indicator in vuex
 - [x] Setup popups or modals for alerts
 - [x] Setup deleting sale along with images in storage
-- [ ] ~~Setup limited tag list & limit tags~~
+- [x] ~~Setup limited tag list & limit tags~~
+- [ ] Setup error logging
 - [ ] Setup simple breadcrumb navigation? 
 - [ ] Setup date picker
 - [ ] Setup image compression
@@ -34,7 +35,8 @@
 - [ ] Setup sale tracking & metrics for users
 - [ ] Setup logging for errors so we can track
 - [ ] Customize trix buttons and editor to match 
-- [ ] Setup pagination 
+- [ ] Setup pagination
+- [ ] Setup admin dashboard
 - [ ] Setup image drag and drop
 - [ ] Setup image & tags with drag to reorder
 - [ ] Setup accounts to save/use previously used addresses
