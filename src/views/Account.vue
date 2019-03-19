@@ -2,13 +2,13 @@
 	<div>
 
 		<Modal title="Alert" v-if="confirmDeleteModal" @close="confirmDeleteModal = false" @confirm="deleteSale()" actionTitle="Confirm Delete">
-	      <div class="p-4">
-	      	Are you sure you want to delete this sale?
+	      <div class="px-4 text-lg leading-tight">
+	      	Are you sure you want to delete this sale? This will delete your sale and all images associated.
 	      </div>
 	    </Modal>
 
 	    <Modal title="Confirm" v-if="confirmAccountDeleteModal" @close="confirmAccountDeleteModal = false" @confirm="deleteFirebaseUser()" actionTitle="Confirm">
-	      <div class="p-4">
+	      <div class="px-4 text-lg leading-tight">
 	      	Are you sure you want to delete your account? This will unlink your social account and cannot be recovered.
 	      </div>
 	    </Modal>

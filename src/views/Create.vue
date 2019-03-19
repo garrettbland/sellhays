@@ -2,7 +2,7 @@
 	<div>
 
 		<Modal title="Success!" v-if="successfulModal" @close="successfulModal = false" @confirm="goToSale()" actionTitle="View your sale">
-	      <div class="p-4">
+	      <div class="px-4 text-lg leading-tight">
 	      	Your sale was created successfully. To manage your current sales, go into your account page.
 	      </div>
 	    </Modal>
@@ -63,7 +63,7 @@
 		   	<!-- row -->
 		    <div class="flex flex-col mt-8">
 	    		<div class="text-grey-dark uppercase text-sm p-2">
-	    			Categories <span v-if="sale.category_1 == ''" class="text-red">(1) category required</span>
+	    			Categories <span v-if="sale.category_1 == ''" class="text-red">Min (1) category required</span>
 	    		</div>
 		    	<div class="flex flex-wrap justify-between items-center">
 		      		<div class="w-full sm:w-full md:w-1/3 md:pr-4 mb-2 sm:mb-2 md:mb-0 pt-4 sm:pt-4 md:pt-0">
@@ -168,7 +168,7 @@
 
 		<div class="max-w-xl mx-auto items-center flex flex-wrap sm:flex-wrap md:flex-no-wrap justify-center sm:justify-center md:justify-end font-sans mb-12 p-4 sm:p-4 md:p-0">
 			<div class="mt-4 md:mr-4 p-2 bg-red-lighter text-red-darker rounded-lg shadow-lg w-full sm:w-full md:w-auto" v-if="errors.length > 0">
-				Something went wrong. Please check all fields and try again
+				Form incomplete. Please check all fields and try again
 			</div>
 			<button type="submit" class="flex justify-center sm:justify-center items-center px-2 h-12 bg-purple border-2 border-transparent hover:bg-purple-dark rounded-lg no-underline focus:outline-none mt-4">
 				<span class="px-3 text-white text-xl">Submit</span>
