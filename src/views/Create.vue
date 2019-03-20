@@ -22,19 +22,21 @@
 
 		    <!-- row -->
 		    <div class="flex flex-wrap justify-between items-center">
-		    	<div class="w-full sm:w-full md:w-3/5 md:pr-4">
+		    	<div class="w-full">
 		    		<div class="text-grey-dark uppercase text-sm px-2 py-2">
 		    			Address <span v-if="sale.address == ''" class="text-red">Required</span>
 		    		</div>
-		      		<input v-model="sale.address" placeholder="Street Address" class="w-full bg-grey-light p-3 text-lg text-black rounded-lg focus:outline-none focus:bg-white border-2 border-transparent hover:border-grey focus:border-grey" />
-		      	</div>
-		      	<div class="w-full sm:w-full md:w-2/5 pt-4 sm:pt-4 md:pt-0">
-		      		<div class="text-grey-dark uppercase text-sm px-2 py-2">
-		    			City
-		    		</div>
-		      		<div class="flex bg-grey-lighter p-3 text-lg text-grey-darker opacity-75 rounded-lg focus:outline-none border-2 border-transparent">
-			        	Hays, Kansas 67601
-			     	</div>
+		      		<gmap-autocomplete 
+				      	:value="sale.address"
+				        placeholder="Sale Address"
+				        class="w-full bg-grey-light p-3 text-lg text-black rounded-lg focus:outline-none focus:bg-white border-2 border-transparent hover:border-grey focus:border-grey"
+				        @place_changed="setPlace"
+				        :select-first-on-enter="true"
+				        :options="{
+				        	bounds: {north: 38.928954, south: 38.828196, east: -99.237630, west: -99.385881},
+	            			strictBounds: true
+				        }">
+			      	</gmap-autocomplete>
 		      	</div>
 		    </div>
 
@@ -180,6 +182,7 @@
 			</button>
 		</div>
 		</form>
+
 	</div>
 </template>
 
@@ -207,6 +210,7 @@ export default {
 			tempImages:[],
 			sale:{
 				address:null,
+				latLng:null,
 				date_start:null,
 				time_start:null,
 				time_end:null,
@@ -223,6 +227,17 @@ export default {
 		}
 	},
 	methods:{
+		setPlace(place) {
+			if (!place) return
+			this.sale.latLng = {
+				lat: place.geometry.location.lat(),
+				lng: place.geometry.location.lng(),
+			};
+
+			this.sale.address = place.address_components[0].long_name + ' ' + place.address_components[1].long_name + ' ' + place.address_components[2].long_name + ' ' + place.address_components[4].short_name + ' ' + place.address_components[6].long_name
+
+			//window.alert(place.address_components[0].long_name + place.address_components[1].long_name + place.address_components[2].long_name + place.address_components[4].short_name + place.address_components[6].long_name)
+		},
 		chooseImage(){
 
 			// Find reference id in template and simulate a click

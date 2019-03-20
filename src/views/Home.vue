@@ -45,7 +45,7 @@
 		 	    <div class="bg-green text-green-darkest px-2 py-1 rounded-full text-xs mr-1" v-if="sale.category_2">
 		 	     {{sale.category_2 | capitalize}}
 		 	    </div>
-		 	    <div class="bg-green text-green-darkest px-2 py-1 rounded-full text-xs mr-1" v-if="sale.category_2">
+		 	    <div class="bg-green text-green-darkest px-2 py-1 rounded-full text-xs mr-1" v-if="sale.category_3">
 		 	     {{sale.category_3 | capitalize}}
 		 	    </div>
 			  </div>

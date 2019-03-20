@@ -10,34 +10,52 @@
 			description="View details, images, and more"
 		/>
 
-		<div class="max-w-xl mx-auto -mt-6 bg-grey p-4 rounded-lg shadow-lg">
-			<ul>
-				<li>
-					<div>
-						{{sale.date_start}}
-					</div>
-					<div>
-						{{sale.address}}
-					</div>
-					<div v-html="sale.description">
+		<div class="max-w-xl mx-auto -mt-6 bg-white rounded-lg shadow-md">
+			
+			<!--images-->
+			<div class="h-64 rounded-t-lg flex overflow-x-scroll">
+				<img v-for="image in sale.images" class="h-64 w-auto" :src="image"/>
+			</div>
 
+			<!--body-->
+			<div class="p-4">
+				<div class="flex items-center mt-2">
+					<div class="bg-green text-green-darkest px-3 py-1 rounded-full text-md mr-1">
+						{{sale.category_1 | capitalize}}
 					</div>
-					<div>
-						Categories
-						<ul>
-							<li>{{sale.category_1}}</li>
-							<li>{{sale.category_2}}</li>
-							<li>{{sale.category_3}}</li>
-						</ul>
+					<div class="bg-green text-green-darkest px-3 py-1 rounded-full text-md mr-1" v-if="sale.category_2">
+						{{sale.category_2 | capitalize}}
 					</div>
-					<div>
-						Images
-						<ul>
-							<li v-for="(image,index) in sale.images" :key="index"><img :src="image"/></li>
-						</ul>
+					<div class="bg-green text-green-darkest px-3 py-1 rounded-full text-md mr-1" v-if="sale.category_3">
+						{{sale.category_3 | capitalize}}
 					</div>
-				</li>
-			</ul>
+				</div>
+				<div class="text-3xl">
+					{{sale.address}}
+				</div>
+				{{sale.date_start}}<br>
+				{{sale.time_start}}{{sale.time_end}}
+				<div>
+					<p v-html="sale.description"></p>
+				</div>
+			</div>
+
+			<!--map-->
+			<div class="h-64 bg-blue rounded-b-lg">
+				<GmapMap
+				  :center="{lat:sale.latLng.lat, lng:sale.latLng.lng}"
+				  :zoom="15"
+				  map-type-id="roadmap"
+				  style="width: 500px; height: 300px"
+				>
+				  <GmapMarker
+				    :position="sale.latLng"
+				    :clickable="true"
+				    :draggable="true"
+				    @click="center=m"
+				  />
+				</GmapMap>
+			</div>
 		</div>
 
 	</div>
@@ -48,7 +66,7 @@ import Navbar from '@/components/Navbar'
 import Header from '@/components/Header'
 import Actionbar from '@/components/Actionbar'
 export default {
-	name:'Home',
+	name:'Sale',
 	components:{
 		Navbar,
 		Header,
@@ -56,7 +74,7 @@ export default {
 	},
 	data(){
 		return {
-			sale:{}
+			sale:{},
 		}
 	},
 	methods:{
@@ -103,5 +121,12 @@ export default {
 
 		})
 	},
+	filters: {
+	  capitalize: function (value) {
+	    if (!value) return ''
+	    value = value.toString()
+	    return value.charAt(0).toUpperCase() + value.slice(1)
+	  }
+	}
 }
 </script>

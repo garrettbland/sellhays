@@ -20,11 +20,12 @@
 - [ ] Setup date picker
 - [ ] Setup image compression
 - [ ] Setup form validation and sanitization
+- [x] Add in Google Maps auto complete and places API
 - [x] Add trix editor to description for rich text editing
 - [ ] ~~Create whole app loading indicator~~
 - [x] Create empty list component
 - [x] Tighten down permissions server/firebase side
-- [ ] Make mobile friendly
+- [x] Make mobile friendly
 - [ ] Make the whole thing look super polished 😎
 
 ### To Do for v2.0
@@ -68,4 +69,22 @@ service firebase.storage {
     }
   }
 }
+```
+
+#### Google Maps Stuff
+
+As of March 20th, I am using a personal google maps api key - garrett
+Using this package, https://github.com/xkjyeah/vue-google-maps
+To create the bounding box, go here -> https://www.latlong.net/
+and then get the points according to this crazyness -> https://developers.google.com/maps/documentation/javascript/reference/coordinates#LatLngBoundsLiteral
+
+```
+<GmapMarker
+  :key="index"
+  v-for="(m, index) in markers"
+  :position="m"
+  :clickable="true"
+  :draggable="true"
+  @click="center=m"
+/>
 ```
