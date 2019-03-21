@@ -92,3 +92,12 @@
 .trix-content:focus{
 	@apply outline-none bg-white border-grey
 }
+
+/* Vue Map */
+.vue-map-container .vue-map {
+	@apply rounded-b-lg
+}
+
+.map-height {
+	height:24rem;
+}

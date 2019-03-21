@@ -10,29 +10,49 @@
 			description="View details, images, and more"
 		/>
 
-		<div class="max-w-xl mx-auto -mt-6 bg-white rounded-lg shadow-md">
+		<div class="max-w-xl mx-auto -mt-6 bg-white rounded-lg shadow-md mb-12">
 			
-			<!--images-->
-			<div class="h-64 rounded-t-lg flex overflow-x-scroll">
-				<img v-for="image in sale.images" class="h-64 w-auto" :src="image"/>
-			</div>
-
 			<!--body-->
 			<div class="p-4">
-				<div class="flex items-center mt-2">
-					<div class="bg-green text-green-darkest px-3 py-1 rounded-full text-md mr-1">
-						{{sale.category_1 | capitalize}}
-					</div>
-					<div class="bg-green text-green-darkest px-3 py-1 rounded-full text-md mr-1" v-if="sale.category_2">
-						{{sale.category_2 | capitalize}}
-					</div>
-					<div class="bg-green text-green-darkest px-3 py-1 rounded-full text-md mr-1" v-if="sale.category_3">
-						{{sale.category_3 | capitalize}}
-					</div>
+
+				<!--buttons-->
+				<div class="flex">
+					<button class="bg-grey-light border-2 border-transparent text-grey-darker px-6 py-2 rounded-lg 
+					hover:border-grey mr-2">
+						Facebook
+					</button>
+					<button class="bg-grey-light border-2 border-transparent text-grey-darker px-6 py-2 rounded-lg 
+					hover:border-grey mr-2">
+						Twitter
+					</button>
+					<button class="bg-grey-light border-2 border-transparent text-grey-darker px-6 py-2 rounded-lg 
+					hover:border-grey mr-2">
+						Print
+					</button>
+					<button class="bg-grey-light border-2 border-transparent text-grey-darker px-6 py-2 rounded-lg 
+					hover:border-grey">
+						Email
+					</button>
 				</div>
-				<div class="text-3xl">
+
+				<!--address-->
+				<div class="text-2xl sm:text-2xl md:text-3xl font-bold">
 					{{sale.address}}
 				</div>
+
+				<!--tags-->
+				<div class="flex items-center mt-2">
+					<div class="bg-green text-green-darkest px-2 py-1 rounded-full text-xs mr-1">
+					 {{sale.category_1 | capitalize}}
+					</div>
+					<div class="bg-green text-green-darkest px-2 py-1 rounded-full text-xs mr-1" v-if="sale.category_2">
+					 {{sale.category_2 | capitalize}}
+					</div>
+					<div class="bg-green text-green-darkest px-2 py-1 rounded-full text-xs mr-1" v-if="sale.category_3">
+					 {{sale.category_3 | capitalize}}
+					</div>
+				</div>
+
 				{{sale.date_start}}<br>
 				{{sale.time_start}}{{sale.time_end}}
 				<div>
@@ -41,17 +61,21 @@
 			</div>
 
 			<!--map-->
-			<div class="h-64 bg-blue rounded-b-lg">
+			<div class="bg-yellow-lightest rounded-b-lg">
 				<GmapMap
 				  :center="{lat:sale.latLng.lat, lng:sale.latLng.lng}"
 				  :zoom="15"
 				  map-type-id="roadmap"
-				  style="width: 500px; height: 300px"
+				  :options="{
+				  	gestureHandling:'cooperative'
+				  }"
+				  class="w-full map-height"
 				>
 				  <GmapMarker
 				    :position="sale.latLng"
 				    :clickable="true"
 				    :draggable="true"
+
 				    @click="center=m"
 				  />
 				</GmapMap>
