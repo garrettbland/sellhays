@@ -45,6 +45,30 @@
 	fill:#794ACF;
 }
 
+.printer-primary {
+	fill:#606F7B;
+}
+
+.printer-secondary {
+	fill:#D6BBFC;
+}
+
+.link-primary {
+	fill:#3490DC;
+}
+
+.link-secondary {
+	fill:#1C3D5A;
+}
+
+.map-primary {
+	fill:#FFF382;
+}
+
+.map-secondary {
+	fill:#453411;
+}
+
 /* Header */
 .header-background{
   background: rgb(26,21,111);

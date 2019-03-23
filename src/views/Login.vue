@@ -7,7 +7,7 @@
 		<!--header-->
 		<Header 
 			title="Login"
-			description="Sign in with your preferred social login to post"
+			description="Sign in with your preferred social login to post. No signup necessary."
 		/>
 
 		<div class="max-w-xl mx-auto bg-white p-2 rounded-lg shadow -mt-6 font-sans">
