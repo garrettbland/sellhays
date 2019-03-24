@@ -23,7 +23,7 @@
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-5 icon-calendar mr-1"><path class="calendar-primary" d="M5 4h14a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6c0-1.1.9-2 2-2zm0 5v10h14V9H5z"></path><path class="calendar-secondary" d="M7 2a1 1 0 0 1 1 1v3a1 1 0 1 1-2 0V3a1 1 0 0 1 1-1zm10 0a1 1 0 0 1 1 1v3a1 1 0 0 1-2 0V3a1 1 0 0 1 1-1z"></path></svg>
 					</div>
 					<div class="text-sm mr-4">
-						{{sale.date_start}}
+						{{sale.date_start | formatDate}}
 					</div>
 				</div>
 				<div class="flex items-center"> 
@@ -71,6 +71,7 @@
 import Navbar from '@/components/Navbar'
 import Header from '@/components/Header'
 import Actionbar from '@/components/Actionbar'
+import moment from 'moment'
 export default {
 	name:'Home',
 	components:{
@@ -134,6 +135,11 @@ export default {
 	    if (!value) return ''
 	    value = value.toString()
 	    return value.charAt(0).toUpperCase() + value.slice(1)
+	  },
+	  formatDate: function (value) {
+	  	if (value) {
+			return moment(value.toDate()).format('ddd MMM Do YYYY')
+		}
 	  }
 	}
 }

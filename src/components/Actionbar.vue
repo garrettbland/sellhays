@@ -1,6 +1,6 @@
 <template>
 	<div class="mx-4 sm:mx-4 md:mx-0">
-		<div class="max-w-xl mx-auto flex items-center justify-between bg-white p-3 rounded-lg shadow-lg -mt-6 mb-6 font-sans ">
+		<div class="max-w-xl mx-auto flex items-center justify-between bg-white p-3 rounded-lg shadow-md -mt-6 mb-6 font-sans ">
 			<div v-if="$store.state.currentUser == null">
 				<router-link tag="a" :to="{'name':'login',query:{redirect:'create'}}" class="flex items-center py-1 px-1 bg-purple text-white hover:bg-purple-dark rounded-lg no-underline focus:outline-none">
 		            <span class="px-3 text-purple-lightest">Create Free Sale</span>

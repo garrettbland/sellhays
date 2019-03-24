@@ -46,20 +46,51 @@
 		    		<div class="text-grey-dark uppercase text-sm px-2 py-2">
 		    			Date of Sale <span v-if="sale.date_start == ''" class="text-red">Required</span>
 		    		</div>
-		      		<input v-model="sale.date_start" placeholder="Aug 5, 2019" class="w-full bg-grey-light p-3 text-lg text-black rounded-lg focus:outline-none focus:bg-white border-2 border-transparent hover:border-grey focus:border-grey" />
+		    		<datepicker v-model="sale.date_start" name="date_start" input-class="w-full bg-grey-light p-3 text-lg text-black rounded-lg focus:outline-none focus:bg-white border-2 border-transparent hover:border-grey focus:border-grey" placeholder="Select Date" format="D MMM dsu yyyy"></datepicker>
+		      		<!-- <input v-model="sale.date_start" placeholder="Aug 5, 2019" class="w-full bg-grey-light p-3 text-lg text-black rounded-lg focus:outline-none focus:bg-white border-2 border-transparent hover:border-grey focus:border-grey" /> -->
 		      	</div>
 		      	<div class="w-full sm:w-full md:w-1/4 md:pr-4 pt-4 sm:pt-4 md:pt-0">
 		      		<div class="text-grey-dark uppercase text-sm px-2 py-2">
 		    			Start Time <span v-if="sale.time_start == ''" class="text-red">Required</span>
 		    		</div>
-		      		<input v-model="sale.time_start" placeholder="2:00 PM" class="w-full bg-grey-light p-3 text-lg text-black rounded-lg focus:outline-none focus:bg-white border-2 border-transparent hover:border-grey focus:border-grey" />
+		      		<div class="inline-block relative w-full">
+					  <select v-model="sale.time_start" placeholder="Select Category" class="block appearance-none w-full bg-grey-light p-3 pr-8 text-lg text-black rounded-lg focus:outline-none focus:bg-white border-2 border-transparent hover:border-grey focus:border-grey">
+					  	<option disabled value="">Select Start Time</option>
+					    <option v-for="time in times"
+					        :selected="time == sale.time_start ? 'selected' : ''"
+					        :value="time">
+					       {{ time }}
+					    </option>
+					  </select>
+					  <div class="pointer-events-none absolute pin-y pin-r flex items-center px-2 text-grey-darker">
+					    <svg class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+					  </div>
+					</div>
 		      	</div>
 		      	<div class="w-full sm:w-full md:w-1/4 pt-4 sm:pt-4 md:pt-0">
 		      		<div class="text-grey-dark uppercase text-sm px-2 py-2">
 		    			End Time <span v-if="sale.time_end == ''" class="text-red">Required</span>
 		    		</div>
+		      		<div class="inline-block relative w-full">
+					  <select v-model="sale.time_end" placeholder="Select Category" class="block appearance-none w-full bg-grey-light p-3 pr-8 text-lg text-black rounded-lg focus:outline-none focus:bg-white border-2 border-transparent hover:border-grey focus:border-grey">
+					  	<option disabled value="">Select End Time</option>
+					    <option v-for="time in times"
+					        :selected="time == sale.time_end ? 'selected' : ''"
+					        :value="time">
+					       {{ time }}
+					    </option>
+					  </select>
+					  <div class="pointer-events-none absolute pin-y pin-r flex items-center px-2 text-grey-darker">
+					    <svg class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+					  </div>
+					</div>
+				</div>
+<!-- 		      	<div class="w-full sm:w-full md:w-1/4 pt-4 sm:pt-4 md:pt-0">
+		      		<div class="text-grey-dark uppercase text-sm px-2 py-2">
+		    			End Time <span v-if="sale.time_end == ''" class="text-red">Required</span>
+		    		</div>
 		      		<input v-model="sale.time_end" placeholder="7:00 PM" class="w-full bg-grey-light p-3 text-lg text-black rounded-lg focus:outline-none focus:bg-white border-2 border-transparent hover:border-grey focus:border-grey" />
-		      	</div>
+		      	</div> -->
 		    </div>
 
 		   	<!-- row -->
@@ -193,6 +224,8 @@ import Actionbar from '@/components/Actionbar'
 import Modal from '@/components/Modal'
 import VueTrix from 'vue-trix';
 import categories from '@/assets/categories.json'
+import times from '@/assets/times.json'
+import Datepicker from 'vuejs-datepicker'
 export default {
 	name:'Create',
 	components:{
@@ -201,11 +234,14 @@ export default {
 		Actionbar,
 		Modal,
 		VueTrix,
-		categories
+		categories,
+		times,
+		Datepicker
 	},
 	data(){
 		return {
 			categories,
+			times,
 			tag:'',
 			tempImages:[],
 			sale:{

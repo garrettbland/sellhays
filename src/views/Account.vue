@@ -61,7 +61,7 @@
 					</div>
 					<div @click="viewSale(sale.id)" v-for="(sale,index) in sales" :key="index" class="flex justify-between items-center p-4 hover:bg-grey-lighter cursor-pointer no-underline text-grey-darkest my-sales-table">
 						<div class="flex w-1/3">
-							{{sale.date_start}}
+							{{sale.date_start | formatDate}}
 						</div>
 						<div class="flex flex-1">
 							<span class="hidden sm:hidden md:block">
@@ -161,6 +161,7 @@ import Navbar from '@/components/Navbar'
 import Header from '@/components/Header'
 import Actionbar from '@/components/Actionbar'
 import Modal from '@/components/Modal'
+import moment from 'moment'
 export default {
 	name:'Account',
 	components:{
@@ -371,6 +372,13 @@ export default {
 			state.$store.commit('setLoading', false)
 
 		})
+	},
+	filters:{
+		formatDate: function (value) {
+			if (value) {
+				return moment(value.toDate()).format('ddd MMM Do YYYY')
+			}
+		}
 	}
 }
 </script>

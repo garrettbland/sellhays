@@ -93,7 +93,7 @@ style=" fill:#000000;"><g id="surface1"><path style=" fill:#1C9957;" d="M 42 39 
 							Date
 						</div>
 						<div class="text-lg text-purple-darkest font-bold">
-							{{sale.date_start}}
+							{{sale.date_start | formatDate}}
 						</div>
 					</div>
 				</div>
@@ -184,6 +184,7 @@ style=" fill:#000000;"><g id="surface1"><path style=" fill:#1C9957;" d="M 42 39 
 import Navbar from '@/components/Navbar'
 import Header from '@/components/Header'
 import Actionbar from '@/components/Actionbar'
+import moment from 'moment'
 export default {
 	name:'Sale',
 	components:{
@@ -245,6 +246,11 @@ export default {
 	    if (!value) return ''
 	    value = value.toString()
 	    return value.charAt(0).toUpperCase() + value.slice(1)
+	  },
+	  formatDate: function (value) {
+	  	if (value) {
+			return moment(value.toDate()).format('dddd, MMMM Do YYYY')
+		}
 	  }
 	}
 }
