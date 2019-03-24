@@ -1,6 +1,20 @@
 <template>
 	<div>
 
+<!-- 		<Modal v-if="largeImageModal" @close="largeImageModal = false">
+	      <div class="px-4 text-lg leading-tight">
+	      	<img :src="selectedImage" class="mb-4"/>
+	      	<div class="flex justify-between pb-4">
+	      		<button type="submit" class="flex justify-center sm:justify-center items-center px-2 h-10 bg-purple border-2 border-transparent hover:bg-purple-dark rounded-lg no-underline focus:outline-none">
+              		<span class="px-3 text-white text-md">Previous</span>
+            	</button>
+	      		<button type="submit" class="flex justify-center sm:justify-center items-center px-2 h-10 bg-purple border-2 border-transparent hover:bg-purple-dark rounded-lg no-underline focus:outline-none">
+              		<span class="px-3 text-white text-md">Next</span>
+            	</button>
+	      	</div>
+	      </div>
+	    </Modal> -->
+
 		<!--navbar-->
 		<Navbar />
 
@@ -16,10 +30,10 @@
 			<div class="p-4 flex flex-col">
 
 				<!--buttons-->
-				<div class="flex flex-wrap">
+				<div class="flex flex-wrap noprint">
 
 					<!--button-->
-					<div class="w-full sm:w-full md:w-auto flex items-center mb-4 px-6 py-2 mr-2 rounded-lg bg-grey-lighter text-grey-darkest border-2 border-transparent hover:border-purple cursor-pointer outline-none">
+					<div @click="facebookShare()" class="w-full sm:w-full md:w-auto flex items-center mb-4 px-6 py-2 mr-2 rounded-lg bg-grey-lighter text-grey-darkest border-2 border-transparent hover:border-purple cursor-pointer outline-none">
 						<div>
 							<svg fill="#3B5998" role="img" class="w-6 h-6 mr-2 pt-1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Facebook icon</title><path d="M22.676 0H1.324C.593 0 0 .593 0 1.324v21.352C0 23.408.593 24 1.324 24h11.494v-9.294H9.689v-3.621h3.129V8.41c0-3.099 1.894-4.785 4.659-4.785 1.325 0 2.464.097 2.796.141v3.24h-1.921c-1.5 0-1.792.721-1.792 1.771v2.311h3.584l-.465 3.63H16.56V24h6.115c.733 0 1.325-.592 1.325-1.324V1.324C24 .593 23.408 0 22.676 0"></path></svg>
 						</div>
@@ -28,7 +42,7 @@
 						</div>
 					</div>
 
-					<div class="w-full sm:w-full md:w-auto flex items-center mb-4 px-6 py-2 mr-2 rounded-lg bg-grey-lighter text-grey-darkest border-2 border-transparent hover:border-purple cursor-pointer outline-none">
+					<div @click="tweet()" class="w-full sm:w-full md:w-auto flex items-center mb-4 px-6 py-2 mr-2 rounded-lg bg-grey-lighter text-grey-darkest border-2 border-transparent hover:border-purple cursor-pointer outline-none">
 						<div>
 							<svg fill="#1DA1F2" role="img" class="w-6 h-6 mr-2 pt-1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Twitter icon</title><path d="M23.954 4.569c-.885.389-1.83.654-2.825.775 1.014-.611 1.794-1.574 2.163-2.723-.951.555-2.005.959-3.127 1.184-.896-.959-2.173-1.559-3.591-1.559-2.717 0-4.92 2.203-4.92 4.917 0 .39.045.765.127 1.124C7.691 8.094 4.066 6.13 1.64 3.161c-.427.722-.666 1.561-.666 2.475 0 1.71.87 3.213 2.188 4.096-.807-.026-1.566-.248-2.228-.616v.061c0 2.385 1.693 4.374 3.946 4.827-.413.111-.849.171-1.296.171-.314 0-.615-.03-.916-.086.631 1.953 2.445 3.377 4.604 3.417-1.68 1.319-3.809 2.105-6.102 2.105-.39 0-.779-.023-1.17-.067 2.189 1.394 4.768 2.209 7.557 2.209 9.054 0 13.999-7.496 13.999-13.986 0-.209 0-.42-.015-.63.961-.689 1.8-1.56 2.46-2.548l-.047-.02z"></path></svg>
 						</div>
@@ -36,7 +50,7 @@
 							Tweet
 						</div>
 					</div>
-					<div class="w-full sm:w-full md:w-auto flex items-center mb-4 px-6 py-2 mr-2 rounded-lg bg-grey-lighter text-grey-darkest border-2 border-transparent hover:border-purple cursor-pointer outline-none">
+					<div @click="print()" class="w-full sm:w-full md:w-auto flex items-center mb-4 px-6 py-2 mr-2 rounded-lg bg-grey-lighter text-grey-darkest border-2 border-transparent hover:border-purple cursor-pointer outline-none">
 						<div>
 							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-6 h-6 mr-2 pt-1"><path class="printer-primary" d="M5 8h14a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-5c0-1.1.9-2 2-2zm1 2a1 1 0 0 0 0 2h2a1 1 0 0 0 0-2H6z"></path><path class="printer-secondary" d="M6 14h12v6a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1v-6zm0-6V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v4H6z"></path></svg>
 						</div>
@@ -44,15 +58,15 @@
 							Print
 						</div>
 					</div>
-					<div class="w-full sm:w-full md:w-auto flex items-center mb-4 px-6 py-2 mr-2 rounded-lg bg-grey-lighter text-grey-darkest border-2 border-transparent hover:border-purple cursor-pointer outline-none">
+<!-- 					<div class="w-full sm:w-full md:w-auto flex items-center mb-4 px-6 py-2 mr-2 rounded-lg bg-grey-lighter text-grey-darkest border-2 border-transparent hover:border-purple cursor-pointer outline-none">
 						<div>
 							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-6 h-6 mr-2 pt-1"><path class="link-secondary" d="M19.48 13.03l-.02-.03a1 1 0 1 1 1.75-.98A6 6 0 0 1 16 21h-4a6 6 0 1 1 0-12h1a1 1 0 0 1 0 2h-1a4 4 0 1 0 0 8h4a4 4 0 0 0 3.48-5.97z"></path><path class="link-primary" d="M4.52 10.97l.02.03a1 1 0 1 1-1.75.98A6 6 0 0 1 8 3h4a6 6 0 1 1 0 12h-1a1 1 0 0 1 0-2h1a4 4 0 1 0 0-8H8a4 4 0 0 0-3.48 5.97z"></path></svg>
 						</div>
 						<div>
 							Copy Link
 						</div>
-					</div>
-					<div class="w-full sm:w-full md:w-auto flex items-center mb-4 px-6 py-2 mr-2 rounded-lg bg-grey-lighter text-grey-darkest border-2 border-transparent hover:border-purple cursor-pointer outline-none">
+					</div> -->
+					<div @click="getDirections()" class="w-full sm:w-full md:w-auto flex items-center mb-4 px-6 py-2 mr-2 rounded-lg bg-grey-lighter text-grey-darkest border-2 border-transparent hover:border-purple cursor-pointer outline-none">
 						<div>
 							<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
 class="w-6 h-6 mr-2 pt-1"
@@ -71,7 +85,7 @@ style=" fill:#000000;"><g id="surface1"><path style=" fill:#1C9957;" d="M 42 39 
 				</div>
 
 				<!--tags-->
-				<div class="flex items-center mt-2">
+				<div class="flex items-center mt-2 noprint">
 					<div class="bg-green text-green-darkest px-2 py-1 rounded-full text-xs mr-1">
 					 {{sale.category_1 | capitalize}}
 					</div>
@@ -129,7 +143,7 @@ style=" fill:#000000;"><g id="surface1"><path style=" fill:#1C9957;" d="M 42 39 
 				</div>
 
 				<!--Images-->
-				<div class="flex mb-4">
+				<div class="flex mb-4 noprint">
 					<div class="w-8 mr-2">
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-8 mr-2 icon-photo"><path class="primary" d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2zm9 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"></path><path class="secondary" d="M15.3 12.3a1 1 0 0 1 1.4 0l2 2a1 1 0 0 1 .3.7v3a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-3a1 1 0 0 1 .3-.7l4-4a1 1 0 0 1 1.4 0l3.3 3.29 1.3-1.3z"></path></svg>
 					</div>
@@ -143,7 +157,7 @@ style=" fill:#000000;"><g id="surface1"><path style=" fill:#1C9957;" d="M 42 39 
 							</div>
 						</div>
 						<div class="flex flex-wrap" v-if="sale.images.length > 0" >
-							<div v-for="image in sale.images" class="w-full sm:w-full md:w-1/3 p-2">
+							<div v-for="image in sale.images" class="w-full sm:w-full md:w-1/3 p-2" @click="viewLargeImage(image)">
 								<img :src="image" class="rounded-lg shadow hover:shadow-md cursor-pointer"/>
 							</div>
 						</div>
@@ -185,19 +199,40 @@ import Navbar from '@/components/Navbar'
 import Header from '@/components/Header'
 import Actionbar from '@/components/Actionbar'
 import moment from 'moment'
+import Modal from '@/components/Modal'
 export default {
 	name:'Sale',
 	components:{
 		Navbar,
 		Header,
-		Actionbar
+		Actionbar,
+		Modal
 	},
 	data(){
 		return {
 			sale:{},
+			largeImageModal:false,
+			selectedImage:null,
 		}
 	},
 	methods:{
+		viewLargeImage(image){
+			//this.selectedImage = image
+			//this.largeImageModal = true
+			window.open(image, '_blank');
+		},
+		facebookShare(){
+			window.open('https://www.facebook.com/sharer.php?u='+window.location,'_blank')
+		},
+		tweet(){
+			window.open('https://twitter.com/intent/tweet?&text=Check%20out%20this%20garage%20sale%20in%20Hays,%20KS!&via=sellhays&url='+window.location,'_blank')
+		},
+		print(){
+			window.print()
+		},
+		getDirections(){
+			window.open('https://maps.google.com/?q='+this.sale.address,'_blank')
+		},
 		async getSale(saleId){
 
 			// Set state so we can use variable within firebase functions

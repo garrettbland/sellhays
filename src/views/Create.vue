@@ -16,7 +16,7 @@
 			description="Post your garage sale for free"
 		/>
 		    
-		  <form @submit.prevent="validate">
+		  <form @submit.prevent="validate" v-bind:class="checkLoading()">
 		  <div class="max-w-xl mx-auto bg-white p-4 rounded-lg shadow-lg -mt-6 font-sans">
 		    <div class="flex flex-col">
 
@@ -199,7 +199,7 @@
 		    </div>
 		  </div>
 
-		<div class="max-w-xl mx-auto items-center flex flex-wrap sm:flex-wrap md:flex-no-wrap justify-center sm:justify-center md:justify-end font-sans mb-12 p-4 sm:p-4 md:p-0">
+		<div class="max-w-xl mx-auto items-center flex flex-wrap sm:flex-wrap md:flex-no-wrap justify-center sm:justify-center md:justify-end font-sans mb-12 p-4 sm:p-4 md:p-0" v-bind:class="checkLoading()">
 			<div class="mt-4 md:mr-4 p-2 bg-red-lighter text-red-darker rounded-lg shadow-lg w-full sm:w-full md:w-auto" v-if="errors.length > 0">
 				Form incomplete. Please check all fields and try again
 			</div>
@@ -263,6 +263,11 @@ export default {
 		}
 	},
 	methods:{
+		checkLoading(){
+			if(this.$store.state.loading){
+				return 'opacity-50 cursor-not-allowed'
+			}
+		},
 		setPlace(place) {
 			if (!place) return
 			this.sale.latLng = {
@@ -325,7 +330,7 @@ export default {
 			})
 
 			// If there are no errors, create sale function
-			if(state.errors.length == 0){
+			if(state.errors.length == 0 && this.$store.state.loading === false){
 				this.createSale(event)
 			}
 

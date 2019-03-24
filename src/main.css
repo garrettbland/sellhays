@@ -125,3 +125,10 @@
 .map-height {
 	height:24rem;
 }
+
+/* Print Style */
+@media print{
+   .noprint{
+       display:none;
+   }
+}

@@ -16,7 +16,7 @@
           <div>
             <slot></slot>
           </div>
-          <div class="p-4" @click="$emit('confirm')">
+          <div class="p-4" @click="$emit('confirm')" v-if="actionTitle">
             <button type="submit" class="flex justify-center sm:justify-center items-center px-2 h-10 bg-purple border-2 border-transparent hover:bg-purple-dark rounded-lg no-underline focus:outline-none">
               <span class="px-3 text-white text-md">{{actionTitle}}</span>
 

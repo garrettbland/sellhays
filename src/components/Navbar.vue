@@ -1,5 +1,5 @@
 <template>
-	<div class="w-full bg-grey-lighter">
+	<div class="w-full bg-grey-lighter noprint">
 	  <div class="max-w-xl mx-auto flex items-center justify-between px-3 py-2 font-sans">
 	    <div class="w-2/5">
 	      <router-link tag="a" :to="{'name':'home'}" class="router-link-exact-active router-link-active flex items-center nunito no-underline text-purple hover:text-purple-dark">
