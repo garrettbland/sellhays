@@ -1,9 +1,6 @@
 <template>
 	<div>
 
-		<!--navbar-->
-		<Navbar />
-
 		<!--header-->
 		<Header 
 			title="Sell Hays"
@@ -15,7 +12,7 @@
 
 		<!--sales-->
 		<div class="max-w-xl mx-auto flex flex-wrap font-sans mb-12">
-		  <router-link tag="a" v-for="(sale,index) in sales" :key="index" :to="{'name':'sale',params:{id:sale.id}}" class="bg-white shadow hover:shadow-md p-4 w-full mb-4 rounded-lg flex items-center justify-between cursor-pointer sale no-underline">
+		  <router-link tag="a" v-for="(sale,index) in sales" :key="index" :to="{'name':'sale',params:{id:sale.id}}" class="bg-white shadow-md hover:shadow-lg p-4 w-full mb-4 rounded-lg flex items-center justify-between cursor-pointer sale no-underline">
 		    <div class="w-2/3 no-underline text-black">
 		      <div class="flex flex-col sm:flex-col md:flex-row text-grey-darker">
 		      	<div class="flex items-center">

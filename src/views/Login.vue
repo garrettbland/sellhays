@@ -1,9 +1,6 @@
 <template>
 	<div>
 
-		<!--navbar-->
-		<Navbar />
-
 		<!--header-->
 		<Header 
 			title="Login"

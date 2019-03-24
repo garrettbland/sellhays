@@ -6,9 +6,6 @@
 	      	Your sale was created successfully. To manage your current sales, go into your account page.
 	      </div>
 	    </Modal>
-		
-		<!--navbar-->
-		<Navbar />
 
 		<!--header-->
 		<Header 

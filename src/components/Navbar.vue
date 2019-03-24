@@ -2,7 +2,7 @@
 	<div class="w-full bg-grey-lighter noprint">
 	  <div class="max-w-xl mx-auto flex items-center justify-between px-3 py-2 font-sans">
 	    <div class="w-2/5">
-	      <router-link tag="a" :to="{'name':'home'}" class="router-link-exact-active router-link-active flex items-center nunito no-underline text-purple hover:text-purple-dark">
+	      <router-link :to="{'name':'home'}" class="router-link-exact-active router-link-active flex items-center nunito no-underline text-purple hover:text-purple-dark">
 	        <div>
 	          <img src="https://image.flaticon.com/icons/svg/138/138237.svg" alt="Sell Hays Logo" class="w-12 mr-4"/>
 	        </div>
@@ -19,7 +19,7 @@
 	    <div class="w-2/5 flex justify-end">
 
 	    	<div v-if="$store.state.currentUser == null">
-				<router-link tag="a" :to="{'name':'account'}" class="router-link-exact-active router-link-active flex items-center nunito no-underline text-grey-dark hover:text-grey-darker">
+				<router-link :to="{'name':'account'}" class="router-link-exact-active router-link-active flex items-center nunito no-underline text-grey-dark hover:text-grey-darker">
 					<div class="text-lg font-bold">
 						Login
 					</div>

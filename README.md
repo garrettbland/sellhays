@@ -9,6 +9,8 @@
 4. `yarn serve` (for development)
 5. `yarn deploy` (deploys to live firebase hosting. ONLY deploy from master.)
 
+### Bugs
+- [ ] If you upload image and then remove while creating sale, form submits for some reason - Sun Mar 24, 2019
 
 ### To Do for v1.0
 - [x] Setup global loading indicator in vuex
@@ -17,16 +19,18 @@
 - [x] ~~Setup limited tag list & limit tags~~
 - [ ] Setup error logging
 - [ ] Setup simple breadcrumb navigation? 
-- [ ] Setup date picker
+- [x] Setup date picker
 - [ ] Setup image compression
-- [ ] Setup form validation and sanitization
+- [ ] Setup image size limits
+- [x] Setup image modal in favor of new tab
+- [x] Setup form validation and sanitization
 - [x] Add in Google Maps auto complete and places API
 - [x] Add trix editor to description for rich text editing
-- [ ] ~~Create whole app loading indicator~~
+- [x] ~~Create whole app loading indicator~~
 - [x] Create empty list component
 - [x] Tighten down permissions server/firebase side
 - [x] Make mobile friendly
-- [ ] Make the whole thing look super polished 😎
+- [x] Make the whole thing look super polished 😎
 
 ### To Do for v2.0
 - [ ] Setup sale editing

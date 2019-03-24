@@ -20,9 +20,6 @@
 	      </div>
 	    </Modal>
 
-		<!--navbar-->
-		<Navbar />
-
 		<!--header-->
 		<Header 
 			title="Account"

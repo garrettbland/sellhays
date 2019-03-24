@@ -1,22 +1,7 @@
 <template>
 	<div>
 
-<!-- 		<Modal v-if="largeImageModal" @close="largeImageModal = false">
-	      <div class="px-4 text-lg leading-tight">
-	      	<img :src="selectedImage" class="mb-4"/>
-	      	<div class="flex justify-between pb-4">
-	      		<button type="submit" class="flex justify-center sm:justify-center items-center px-2 h-10 bg-purple border-2 border-transparent hover:bg-purple-dark rounded-lg no-underline focus:outline-none">
-              		<span class="px-3 text-white text-md">Previous</span>
-            	</button>
-	      		<button type="submit" class="flex justify-center sm:justify-center items-center px-2 h-10 bg-purple border-2 border-transparent hover:bg-purple-dark rounded-lg no-underline focus:outline-none">
-              		<span class="px-3 text-white text-md">Next</span>
-            	</button>
-	      	</div>
-	      </div>
-	    </Modal> -->
-
-		<!--navbar-->
-		<Navbar />
+		<ImageModal v-if="largeImageModal" @close="largeImageModal = false" :largeImage="selectedImage"/>
 
 		<!--header-->
 		<Header 
@@ -199,14 +184,14 @@ import Navbar from '@/components/Navbar'
 import Header from '@/components/Header'
 import Actionbar from '@/components/Actionbar'
 import moment from 'moment'
-import Modal from '@/components/Modal'
+import ImageModal from '@/components/ImageModal'
 export default {
 	name:'Sale',
 	components:{
 		Navbar,
 		Header,
 		Actionbar,
-		Modal
+		ImageModal
 	},
 	data(){
 		return {
@@ -217,9 +202,9 @@ export default {
 	},
 	methods:{
 		viewLargeImage(image){
-			//this.selectedImage = image
-			//this.largeImageModal = true
-			window.open(image, '_blank');
+			this.selectedImage = image
+			this.largeImageModal = true
+			//window.open(image, '_blank');
 		},
 		facebookShare(){
 			window.open('https://www.facebook.com/sharer.php?u='+window.location,'_blank')
