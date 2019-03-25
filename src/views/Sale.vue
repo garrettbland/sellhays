@@ -143,7 +143,7 @@ style=" fill:#000000;"><g id="surface1"><path style=" fill:#1C9957;" d="M 42 39 
 						</div>
 						<div class="flex flex-wrap" v-if="sale.images.length > 0" >
 							<div v-for="image in sale.images" class="w-full sm:w-full md:w-1/3 p-2" @click="viewLargeImage(image)">
-								<img :src="image" class="rounded-lg shadow hover:shadow-md cursor-pointer"/>
+								<img :src="image" class="rounded-lg border-2 border-grey-light hover:border-purple cursor-pointer"/>
 							</div>
 						</div>
 						<div class="text-purple-darkest" v-else>

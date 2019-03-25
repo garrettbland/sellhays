@@ -20,8 +20,8 @@
 - [ ] Setup error logging
 - [ ] Setup simple breadcrumb navigation? 
 - [x] Setup date picker
-- [ ] Setup image compression
-- [ ] Setup image size limits
+- [x] Setup image compression (set to 0.6 - 1.4 MB jpeg -> 30Kb)
+- [x] Setup image size limits (set to 700 max width)
 - [x] Setup image modal in favor of new tab
 - [x] Setup form validation and sanitization
 - [x] Add in Google Maps auto complete and places API

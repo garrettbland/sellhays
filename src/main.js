@@ -4,9 +4,8 @@ import router from './router'
 import store from './store'
 const fb = require('./firebaseConfig.js')
 import './main.css'
-
 import * as VueGoogleMaps from 'vue2-google-maps'
- 
+
 Vue.use(VueGoogleMaps, {
   load: {
     key: 'AIzaSyAyVIJRbLGGQWzYG3_P_5cTFddGn4MsGV0',

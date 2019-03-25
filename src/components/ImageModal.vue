@@ -69,6 +69,8 @@ export default {
   /*  background-color: #fff;
     border-radius: 2px;*/
     transition: all .3s ease;
+    max-height: 100%;
+    overflow-y: scroll;
   }
   .modal-enter {
     opacity: 0;

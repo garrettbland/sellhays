@@ -8,6 +8,7 @@
     "deploy": "mv .env staging.env && mv production.env .env && vue-cli-service build && firebase deploy && firebase use default && mv .env production.env && mv staging.env .env"
   },
   "dependencies": {
+    "compressorjs": "^1.0.5",
     "firebase": "^5.8.5",
     "moment": "^2.24.0",
     "tailwindcss": "^0.7.4",

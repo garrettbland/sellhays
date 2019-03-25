@@ -168,8 +168,13 @@
 
 		   	<!-- row -->
 		    <div class="flex flex-col mt-8">
-		    	<div class="w-full text-grey-dark uppercase text-sm px-2 py-2">
-	    			Images (max of 3)
+		    	<div class="w-full text-grey-dark text-sm px-2 py-2">
+	    			<div class="uppercase">
+	    				Images (max of 3)
+	    			</div>
+	    			<div class="text-xs italic">
+	    				Images must be .jpg or .png and under 10Mb
+	    			</div>
 	    		</div>
 	    		<div class="flex flex-wrap">
 			      <div class="w-full sm:w-full md:w-1/3 px-2 pb-2 sm:pb-2 md:pb-0" v-for="(image,index) in tempImages">
@@ -223,6 +228,7 @@ import VueTrix from 'vue-trix';
 import categories from '@/assets/categories.json'
 import times from '@/assets/times.json'
 import Datepicker from 'vuejs-datepicker'
+import Compressor from 'compressorjs';
 export default {
 	name:'Create',
 	components:{
@@ -295,10 +301,54 @@ export default {
 
 		},
 		onFileChange(e) {
+
+			// Set state so we can use variable within functions
+			var state = this
 		
 			// Listen for user to select image and add image to array of temp images for upload
 			var file = e.target.files[0]
-			this.tempImages.push(file)
+
+			// Get file extension
+			var fileExtension = file.name.split('.')[file.name.split('.').length - 1].toLowerCase();
+
+			// Get file size
+			var fileSize = file.size;
+
+			// If file extension is a png, jpg, or jpeg (the diff between the jpgs may not be needed)
+			if(fileExtension == 'png' || fileExtension == 'jpg' || fileExtension == 'jpeg'){
+
+				// The file is an image, now lets check sizes
+				let maxSize = 10485760 // 10MB
+				if(fileSize < maxSize){
+
+					  new Compressor(file, {
+					  	maxWidth:700,
+					    quality: 0.6,
+					    success(result) {
+
+					      // file is less than maxSize, continue on
+							state.tempImages.push(result)
+
+					    },
+					    error(err) {
+					      console.log(err.message);
+					    },
+					  })
+
+					
+
+				}else{
+
+					// file was over maxSize, give user error
+					window.alert('Error, max image size exceeded. Image must be less than 10 MB. Try uploading a smaller image.')
+
+				}
+			}else{
+
+				// file type isn't a png, jpg, or jpeg
+				window.alert('Error, file type is not allowed. Must be a png or jpeg. Please try again.')
+
+			}
 
 	    },
 	    removeImage(index) {
